@@ -1,0 +1,10 @@
+.mini-cart-btn sup{
+	display: none;
+}
+.user-info-menu-btn{
+	margin-right: 10px;
+	font-size: 12px;
+}
+.quantity .qtybutton{
+	display: none;
+}

@@ -9,7 +9,7 @@ class Category extends Model
     protected $table='category';
 
     public function RelationshipCategoriesChild(){
-        return $this->hasMany('App\CategoriesChild','category_id','ids');
+        return $this->hasMany('App\CategoriesChild','category_id','id');
     }
     public function RelationshipProducts(){
         return $this->hasMany('App\Products','category_id','id');
