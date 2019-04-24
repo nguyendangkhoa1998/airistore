@@ -1,23 +1,39 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+//Admin login
+Route::get('admin-login','Admin\AdminController@Login')->name('admin.login');
+Route::post('admin-login','Admin\AdminController@PostLogin');
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('admin','AdminController@index');
 
-Route::get('login',function()
-{
-	echo 'login';
+//Customer register
+Route::get('/register','PageController@Register')->name('register');
 
-})->name('admin.login');
+Route::post('/register','PageController@PostRegister');
+
+
+//Customer login
+Route::get('/login','PageController@Login')->name('login');
+
+Route::post('/','PageController@PostLogin');
+
+
+//Home page
+Route::get('/','PageController@Index')->name('home');
+
+//Products
+Route::get('/list-products/{id}','PageController@ListProducts')->name('list.products');
+
+//Detail product
+Route::get('/detail-product/{id}','PageController@DetailProducts')->name('detail.product');
+
+//Comment product
+Route::post('post-comment','PageController@PostComment')->name('post.comment');
+
+//My-order
+Route::get('my-order','PageController@MyOrder')->name('my.order');
+
+//Order detail
+Route::get('detail-order/{id}','PageController@DetailOrder')->name('detail.order');
+
+
+
