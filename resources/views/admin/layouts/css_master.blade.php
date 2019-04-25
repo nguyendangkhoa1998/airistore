@@ -28,3 +28,6 @@
 <!-- jQuery custom content scroller -->
 <link href="admin/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
 <link href="admin/css/style.css" rel="stylesheet">
+
+ <!--  Jquery confirm -->
+<link rel="stylesheet" type="text/css" href="admin/css/jquery-confirm.min.css">

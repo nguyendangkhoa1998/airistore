@@ -625,3 +625,6 @@
             </section>
             <!-- Method area End Here -->
 @endsection
+@section('script')
+
+@endsection

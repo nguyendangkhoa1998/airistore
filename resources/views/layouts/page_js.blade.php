@@ -41,3 +41,6 @@
     <script src="assets/js/revoulation.js"></script>
 
     <script src="js/jquery-3.3.1.min.js"></script>
+
+    <!--  Jquery Confirm -->
+    <script type="text/javascript" src="assets/js/jquery-confirm.min.js"></script>

@@ -18,3 +18,5 @@
     <link rel="stylesheet" href="assets/css/main.css">
 
     <link rel="stylesheet" href="css/style.css">
+   <!--  Jquery Confirm -->
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery-confirm.min.css">

@@ -60,3 +60,6 @@
     
     <!-- Custom Theme Scripts -->
     <script src="admin/build/js/custom.min.js"></script>
+
+    <!--  Jquery confirm -->
+    <script type="text/javascript" src="admin/js/jquery-confirm.min.js"></script>
