@@ -5,10 +5,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h1 class="page-title">{{$name_cate->name}}</h1>
+                        <h1 class="page-title">{{$name_categories_child}}</h1>
                         <ul class="breadcrumb justify-content-center">
                             <li><a href="{{route('home')}}">Home</a></li>
-                            <li class="current"><span>{{$name_cate->name}}</span></li>
+                            <li class="current"><span>{{$name_categories_child}}</span></li>
                         </ul>
                     </div>
                 </div>
@@ -214,47 +214,47 @@
                             <div class="shop-products"> 
                                 <div class="row grid-space-20 xxl-block-grid-4">
                                     @if(count($products) > 0 )
-                                    @foreach($products as $items)
-                                    <div class="col-lg-4 col-sm-6 mb--40 mb-md--30">
-                                        <div class="airi-product">
-                                            <div class="product-inner">
-                                                <figure class="product-image">
-                                                    <div class="product-image--holder">
-                                                        <a href="{{route('detail.product',['id'=>$items->id])}}">
-                                                            <img src="{{$items->symbolic_image}}" alt="Product Image" class="primary-image">
-                                                            <img src="{{$items->symbolic_image}}" alt="Product Image" class="secondary-image">
-                                                        </a>
-                                                    </div>
-                                                    <div class="airi-product-action">
-                                                        <div class="product-action">
-                                                            
-                                                            <a class="add_to_cart_btn action-btn" href="{{route('add.cart',['id'=>$items->id])}}" data-toggle="tooltip" data-placement="top" title="Add to Cart">
-                                                                <i class="dl-icon-cart29"></i>
-<!--                                                             </a>
-                                                            <a class="add_wishlist action-btn" href="wishlist.html" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
-                                                                <i class="dl-icon-heart4"></i>
-                                                            </a> -->
-                                                            
+                                        @foreach($products as $items)
+                                            <div class="col-lg-4 col-sm-6 mb--40 mb-md--30">
+                                                <div class="airi-product">
+                                                    <div class="product-inner">
+                                                        <figure class="product-image">
+                                                            <div class="product-image--holder">
+                                                                <a href="{{route('detail.product',['id'=>$items->id])}}">
+                                                                    <img src="{{$items->symbolic_image}}" alt="Product Image" class="primary-image">
+                                                                    <img src="{{$items->symbolic_image}}" alt="Product Image" class="secondary-image">
+                                                                </a>
+                                                            </div>
+                                                            <div class="airi-product-action">
+                                                                <div class="product-action">
+                                                                    
+                                                                    <a class="add_to_cart_btn action-btn" href="{{route('add.cart',['id'=>$items->id])}}" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                                                                        <i class="dl-icon-cart29"></i>
+        <!--                                                             </a>
+                                                                    <a class="add_wishlist action-btn" href="wishlist.html" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
+                                                                        <i class="dl-icon-heart4"></i>
+                                                                    </a> -->
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </figure>
+                                                        <div class="product-info text-center">
+                                                            <h3 class="product-title">
+                                                                <a href="product-details.html">{{$items->name}}</a>
+                                                            </h3>
+                                                            <span class="product-price-wrapper">
+                                                                <span class="money">${{$items->unit_price}}</span>
+                                                               <!--  <span class="product-price-old">
+                                                                    <span class="money">$0</span>
+                                                                </span> -->
+                                                            </span>
                                                         </div>
                                                     </div>
-                                                </figure>
-                                                <div class="product-info text-center">
-                                                    <h3 class="product-title">
-                                                        <a href="product-details.html">{{$items->name}}</a>
-                                                    </h3>
-                                                    <span class="product-price-wrapper">
-                                                        <span class="money">${{$items->unit_price}}</span>
-                                                       <!--  <span class="product-price-old">
-                                                            <span class="money">$0</span>
-                                                        </span> -->
-                                                    </span>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
+                                        @endforeach
                                     @else
-                                    <p> Không có sản phẩm nào.... </p>
+                                        <p> Không có sản phẩm nào.... </p>
                                     @endif
                                 </div>
                             </div>
@@ -273,10 +273,10 @@
                             <div class="sidebar-widget">
                                 <!-- Category Widget Start -->
                                 <div class="product-widget categroy-widget mb--35 mb-md--30">
-                                    <h3 class="widget-title">Categories</h3>
+                                    <h3 class="widget-title">Categories child</h3>
                                     <ul class="prouduct-categories product-widget__list">
-                                        @foreach($categories as $items)
-                                        <li><a href="{{route('shop',['id'=>$items->id])}}">{{$items->name}}</a></li>
+                                        @foreach($categories_child as $items)
+                                        <li><a href="{{route('list.products',['id'=>$items->id])}}">{{$items->name}}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -356,7 +356,7 @@
 
                                 <!-- Category Widget Start -->
                                 {{--  <div class="product-widget tag-widget mb--35 mb-md--30">
-                                    <h3 class="widget-title">Categories</h3>
+                                    <h3 class="widget-title">Categories child</h3>
                                     <div class="tagcloud">
                                         <a href="shop-sidebar.html">chair</a>
                                         <a href="shop-sidebar.html">deco</a>

@@ -15,4 +15,10 @@ class CategoriesChild extends Model
     public function RelationshipProducts(){
         return $this->hasMany('App\Products','categories_child_id','id');
     }
+
+    public function getName(){
+    	$name=CategoriesChild::where('active',1)->get();
+
+    	return $name;
+    }
 }

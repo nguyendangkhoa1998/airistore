@@ -1,39 +1,37 @@
 <?php
-
-// Admin login
+					/*----Admin login------*/
 Route::get('admin-login','Admin\AdminController@Login')->name('admin.login');
 
 Route::post('admin-login','Admin\AdminController@PostLogin');
 
 
-// Customer register
-Route::get('/register','PageController@Register')->name('register');
+					/*------Customer register------*/
+Route::get('/register','CustomerController@Register')->name('register');
 
-Route::post('/register','PageController@PostRegister');
+Route::post('/register','CustomerController@PostRegister');
+
+					/*------Customer login------*/
+Route::get('/login','CustomerController@Login')->name('login');
+
+Route::post('/login','CustomerController@PostLogin');
+
+					/*------Customer logout------*/
+Route::get('/logout','CustomerController@Logout')->name('logout');
 
 
-// Customer login
-Route::get('/login','PageController@Login')->name('login');
-
-Route::post('/login','PageController@PostLogin');
-
-// Customer Logout
-Route::get('/logout','PageController@Logout')->name('logout');
-
-
-// Home page
+					/*------Home page------*/
 Route::get('/','PageController@Index')->name('home');
 
-// Products
+					/*------List Products------*/
 Route::get('/list-products/{id}','PageController@ListProducts')->name('list.products');
 
-// Detail product
+					/*------ Detail Product ------*/
 Route::get('/detail-product/{id}','PageController@DetailProducts')->name('detail.product');
 
-// Comment product
+					/*------ Post Comment Product ------*/
 Route::post('post-comment','PageController@PostComment')->name('post.comment');
 
-// Group route add cart
+					/*------ Group routes Cart ------*/
 Route::group(['prefix' => 'cart','middleware'=>'clientCart'], function() {
 
     Route::get('add-cart/{id}',"CartController@AddCart")->name('add.cart');
@@ -45,10 +43,10 @@ Route::group(['prefix' => 'cart','middleware'=>'clientCart'], function() {
     Route::post('order',"CartController@Order")->name('order');
 });
 
-// My-order
+					/*------ My Order ------*/
 Route::get('my-order','PageController@MyOrder')->name('my.order');
 
-//Order detail
+					/*------ Order Detail ------*/
 Route::get('detail-order/{id}','PageController@DetailOrder')->name('detail.order');
 
 

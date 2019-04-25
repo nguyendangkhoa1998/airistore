@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\MessageBag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -41,101 +40,57 @@ class PageController extends Controller
     }
 
 
-    // Get form register
-    public function Register()
-    {
-    	return view('pages.register');
-    }
-
-
-    // Post register
-    public function PostRegister(Request $request)
-    {
-    	$request->validate([
-            'name'=>'required|max:50|min:2',
-            'email'=>'required|max:50|min:10|unique:users,email',
-            'phone_number'=>'required|numeric|min:9',
-            'address'=>'required',
-            'password'=>'required|max:16|min:6'
-        ],[
-            'name.required'=>'name must not be empty',
-            'name.max'=>'name no more than 50 characters',
-            'name.min'=>'name no less than 2 characters',
-            'email.required'=>'email must not be empty',
-            'email.max'=>'email no more than 50 characters',
-            'email.min'=>'email no less than 10 characters',
-            'email.unique'=>'Email already exists',
-            'phone_number.min'=>'no less than 9 characters',
-            'address.required'=>'address must not be empty',
-            'password.required'=>'password must not be empty',
-            'password.max'=>'password no more than 16 characters',
-            'password.min'=>'password no less than 6 characters',
-        ]);
-
-        $user=new User();
-
-        $user->name=$request->name;
-
-        $user->email=$request->email;
-
-        $user->phone_number=$request->phone_number;
-
-        $user->address=$request->address;
-
-        $user->password=Hash::make($request->password);
-
-        $user->role=1;
-
-        $user->save();
-
-        return redirect(route('login'))->with('alert','Register success');
-    }
-
-
-    // Get form login
-    public function Login()
-    {
-    	return view('pages.login');
-    }
-
-
-    // Post login
-    public function PostLogin(Request $request)
-    {
-
-        // Validation login
-    	$request->validate([
-            'email'=>'required|max:50|min:10',
-            'password'=>'required|max:16|min:6'
-        ],[
-            'email.required'=>'email must not be empty',
-            'email.max'=>'email no more than 50 characters',
-            'email.min'=>'email no less than 10 characters',
-            'password.required'=>'password must not be empty',
-            'password.max'=>'password no more than 16 characters',
-            'password.min'=>'password no less than 6 characters',
-        ]);
-
-        //Check Auth login
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-            return redirect(route('home'));
-        }else{
-            return redirect(route('login'))->with('alert', 'Account or password incorrect !');
-        }
-
-    }
-
-    // Customer logout
-    public function Logout()
-    {
-        Auth::logout();
-        return redirect(route('login'));
-    }
-
     // Get list products
-    public function ListProducts($id)
+    public function ListProducts($id,Request $request)
     {
-    	echo 'list products';
+        //Lấy ra tên danh mục
+        if($id=='all'){
+
+            $name_categories_child='All products';
+
+        }else
+
+            $name_categories_child=CategoriesChild::select('id','name')->where('id',$id)->first();
+
+        
+
+        //Lấy ra tất cả danh mục
+        $categories_child=CategoriesChild::all();
+
+        //Tìm kiếm sản phẩm
+        if ($request->keyword) {
+
+                $products=Products::where(' categories_child_id',$id)
+
+                                ->where('name','like',"%$request->keyword%")
+
+                                ->where('status',1)
+
+                                ->where('quantity','>',1)
+
+                                ->paginate(12);
+
+                $products->setPath(route('list.products',['categories_child_id'=>$id]));
+
+                $products->withPath( route('list.products',['categories_child_id'=>$id]).'?keyword=' . $request->keyword);
+
+        } 
+
+        if($id=='all'){
+
+             $products=Products::where('status',1)
+             ->where('quantity',1)
+             ->paginate(12);
+        }
+            //Lấy ra danh sách sản phẩm theo id category child
+            $products=Products::where('categories_child_id',$id)
+            ->where('status',1)
+            ->where('quantity','>',0)
+            ->paginate(12);
+    
+
+        // Điều hướng về view danh sách sản phẩm
+        return view('pages.shop',compact('products','categories_child','name_categories_child'));
     }
 
     // Detail product
