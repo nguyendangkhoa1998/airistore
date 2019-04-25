@@ -24,14 +24,15 @@
                     <div class="register-box">
                         <h4 class="mb--35 mb-sm--20">To buy products, sign in now</h4>
                         @if(session('alert'))
-                        <div class="alert alert-danger" style="margin-bottom: 0px" role="alert">
-                          {{session('alert')}}
-                          @endif
-                          @if(session('warning'))
-                        <div class="alert alert-warning" style="margin-bottom: 0px" role="alert">
-                          {{session('warning')}}
-                      </div>
+                            <div class="alert alert-danger" style="margin-bottom: 0px" role="alert">
+                                {{session('alert')}}
+                            </div>
                             @endif
+                            @if(session('warning'))
+                                <div class="alert alert-warning" style="margin-bottom: 0px" role="alert">
+                            {{session('warning')}}
+                          </div>
+                          @endif
                           @if ($errors->any())
                               <div class="alert alert-danger">
                                   <ul>
@@ -53,6 +54,9 @@
                      </div>
                      <div class="form__group">
                         <input type="submit" value="Login" class="btn btn-submit btn-style-1">
+                    </div>
+                    <div class="form__group">
+                        <p>If you do not already have an account <a href="{{route('register')}}">Register</a> </p>
                     </div>
                 </form>
             </div>

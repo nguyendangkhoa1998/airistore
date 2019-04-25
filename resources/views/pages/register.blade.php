@@ -28,15 +28,15 @@
                           {{session('alert')}}
                       </div>
                       @endif
-                      @if(count($errors)>0)
-                    <br>
-
-                        @foreach($errors->all() as $er)
-                            <li class="alert alert-danger">{{$er}}</li></br>
-                        @endforeach
-
-                    </ul>
-                @endif
+                      @if ($errors->any())
+                              <div class="alert alert-danger">
+                                  <ul>
+                                      @foreach ($errors->all() as $error)
+                                          <li>{{ $error }}</li>
+                                      @endforeach
+                                  </ul>
+                              </div>
+                      @endif
                       <form action="" method="post" class="form form--login">
                         @csrf
                         <div class="form__group mb--20">
@@ -51,7 +51,7 @@
 
                         <div class="form__group mb--20">
                             <label class="form__label form__label--2" for="email">Phone number<span class="required">*</span></label>
-                            <input type="number" class="form__input form__input--3" id="phone_number" name="phone_number">
+                            <input type="text" class="form__input form__input--3" id="phone_number" name="phone_number">
                         </div>
 
                         <div class="form__group mb--20">
