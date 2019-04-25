@@ -32,15 +32,15 @@
                           {{session('warning')}}
                       </div>
                             @endif
-                      @if(count($errors)>0)
-                    <br>
-
-                        @foreach($errors->all() as $er)
-                            <li class="alert alert-danger">{{$er}}</li></br>
-                        @endforeach
-
-                    </ul>
-                    @endif
+                          @if ($errors->any())
+                              <div class="alert alert-danger">
+                                  <ul>
+                                      @foreach ($errors->all() as $error)
+                                          <li>{{ $error }}</li>
+                                      @endforeach
+                                  </ul>
+                              </div>
+                          @endif
                       <form action="" method="post" class="form form--login">
                         @csrf
                         <div class="form__group mb--20">

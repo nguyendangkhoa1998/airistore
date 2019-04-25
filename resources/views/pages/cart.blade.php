@@ -123,46 +123,41 @@
                                 <h2>Billing Details</h2>
                             </div>
                             <div class="checkout-form">
-                                <form action="{{route('oder')}}" method="post" class="form form--checkout">
+                                <form action="{{route('order')}}" method="post" class="form form--checkout">
                                     @csrf
-                                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                                     <div class="form-row mb--30">
                                         <div class="form__group col-12">
                                             <label for="billing_company" class="form__label form__label--2">Name</label>
-                                            <input type="text" value=" @if(Auth::check('user')) {{Auth::user()->name}}@endif" name="name" id="" class="form__input form__input--2" required="" placeholder="Your name">
-                                        </div>
-                                    </div>
-                                    <div class="form-row mb--30">
-                                        <div class="form__group col-12">
-                                            <label for="billing_streetAddress" class="form__label form__label--2">Street Address <span class="required">*</span></label>
-
-                                            <input type="text" value="@if(Auth::check('user')){{Auth::user()->address}}@endif"  name="address" id="" required="" class="form__input form__input--2 mb--30" placeholder="House number and street name">
+                                            <input type="text" value=" @if(Auth::check('user')) {{Auth::user()->name}}@endif" name="name" class="form__input form__input--2" required="" placeholder="Your name">
                                         </div>
                                     </div>
                                     <div class="form-row mb--30">
                                         <div class="form__group col-12">
                                             <label for="billing_phone" class="form__label form__label--2">Phone <span class="required">*</span></label>
-                                            <input type="text" value="@if(Auth::check('user')){{Auth::user()->phone_number}}@endif"  name="phone_number" required="s" id="billing_phone" class="form__input form__input--2">
+                                            <input type="text" value="@if(Auth::check('user')){{Auth::user()->phone_number}}@endif"  name="phone_number" required="" id="billing_phone" class="form__input form__input--2">
                                         </div>
                                     </div>
-
                                     <div class="form-row mb--30">
                                         <div class="form__group col-12">
-                                            <label for="billing_email" class="form__label form__label--2">Payment method  <span class="required">*</span></label>
-                                            <input type="radio"  value="COD" checked=""  name="payment_method" id="" class="">: COD </br></br>
-
-                                            <input type="radio"  value="ATM"  name="payment_method" id="" class="">: ATM
+                                            <label for="shipping address" class="form__label form__label--2">Shipping address  <span class="required">*</span></label>
+                                            <input type="text" value="{{Auth::user()->address}}" name="shipping_address" class="form__input form__input--2" placeholder="Shipping address">
                                         </div>
                                     </div>
-
                                     <div class="form-row">
                                         <div class="form__group col-12">
                                             <label for="orderNotes" class="form__label form__label--2">Order Notes</label>
                                             <textarea class="form__input form__input--2 form__input--textarea" id="orderNotes" name="note"></textarea>
                                         </div>
                                     </div>
+                                    <div class="form-row mb--30">
+                                        <div class="form__group col-12">
+                                            <label for="paymen method" class="form__label form__label--2">Payment method  <span class="required">*</span></label>
+                                            <input type="radio"  value="COD" checked=""  name="payment_method" id="" class="">: COD </br></br>
+                                            <input type="radio"  value="ATM"  name="payment_method" id="" class="">: ATM
+                                        </div>
+                                    </div>
                                 <button type="button" class="btn btn-fullwidth btn-style-1" data-toggle="modal" data-target="#myModal">
-                                    Oder
+                                    Order
                                 </button>
                                 <!-- Modal -->
                                   <div class="modal fade" id="myModal" role="dialog">
@@ -172,7 +167,7 @@
                                       <div class="modal-content">
                                         <div class="modal-header">
                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                          <h4 class="modal-title">Oder</h4>
+                                          <h4 class="modal-title">Order</h4>
                                         </div>
                                         <div class="modal-body">
                                           <h3>You want to order ?</h3>

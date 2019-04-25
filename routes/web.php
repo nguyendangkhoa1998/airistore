@@ -2,6 +2,7 @@
 
 // Admin login
 Route::get('admin-login','Admin\AdminController@Login')->name('admin.login');
+
 Route::post('admin-login','Admin\AdminController@PostLogin');
 
 
@@ -19,6 +20,7 @@ Route::post('/login','PageController@PostLogin');
 // Customer Logout
 Route::get('/logout','PageController@Logout')->name('logout');
 
+
 // Home page
 Route::get('/','PageController@Index')->name('home');
 
@@ -34,13 +36,13 @@ Route::post('post-comment','PageController@PostComment')->name('post.comment');
 // Group route add cart
 Route::group(['prefix' => 'cart','middleware'=>'clientCart'], function() {
 
-    Route::get('add-cart/{id}',"PageController@addCart")->name('add.cart');
+    Route::get('add-cart/{id}',"CartController@AddCart")->name('add.cart');
 
-    Route::get('delete-cart/{id}',"PageController@deleteCart")->name('delete.cart');
+    Route::get('delete-cart/{id}',"CartController@DeleteCart")->name('delete.cart');
 
-    Route::get('view-cart',"PageController@viewCart")->name('view.cart');
+    Route::get('view-cart',"CartController@ViewCart")->name('view.cart');
 
-    Route::post('oder',"PageController@oder")->name('oder');
+    Route::post('order',"CartController@Order")->name('order');
 });
 
 // My-order
