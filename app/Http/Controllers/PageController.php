@@ -34,9 +34,16 @@ class PageController extends Controller
             ->take(12)
             ->get();
 
+        $top_view_products=Products::where('status',1)
+            ->where('quantity','>',0)
+            ->orderBy('views','desc')
+            ->take(8)
+            ->get();
+        $sql="select product.name as name, sum(order_detail.quantity) as quantity from order_detail join products on order_detail.product_id = product.id
+            group by order_detail.product_id order by quantity desc";
         // Get banners
         $banners=Banners::where('status',1)->get();
-        return view('pages.homepage',compact('new_products','banners'));
+        return view('pages.homepage',compact('new_products','top_view_products','banners'));
     }
 
 
@@ -48,14 +55,28 @@ class PageController extends Controller
 
             $name_categories_child='All products';
 
-        }else
+        }else{
 
-            $name_categories_child=CategoriesChild::select('id','name')->where('id',$id)->first();
+            $get_child=CategoriesChild::select('name')->where('id',$id)->first();
+            $name_categories_child=$get_child->name;
 
-        
+        }
 
         //Lấy ra tất cả danh mục
-        $categories_child=CategoriesChild::all();
+        $categories_child=CategoriesChild::where('active',1)->get();
+
+        //Lấy ra danh sách sản phẩm theo id category child
+            $products=Products::where('categories_child_id',$id)
+            ->where('status',1)
+            ->where('quantity','>',0)
+            ->paginate(12);
+
+        if($id=='all'){
+
+            $products=Products::where('status',1)
+            ->where('quantity','>',0)
+            ->paginate(12);
+        }
 
         //Tìm kiếm sản phẩm
         if ($request->keyword) {
@@ -75,19 +96,6 @@ class PageController extends Controller
                 $products->withPath( route('list.products',['categories_child_id'=>$id]).'?keyword=' . $request->keyword);
 
         } 
-
-        if($id=='all'){
-
-             $products=Products::where('status',1)
-             ->where('quantity',1)
-             ->paginate(12);
-        }
-            //Lấy ra danh sách sản phẩm theo id category child
-            $products=Products::where('categories_child_id',$id)
-            ->where('status',1)
-            ->where('quantity','>',0)
-            ->paginate(12);
-    
 
         // Điều hướng về view danh sách sản phẩm
         return view('pages.shop',compact('products','categories_child','name_categories_child'));

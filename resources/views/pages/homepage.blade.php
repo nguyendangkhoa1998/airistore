@@ -554,11 +554,98 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                </div>
+            </section>
+            <!-- Product tab area End Here -->
+             <!-- Product tab area Start Here -->
+            <section class="product-tab-area ptb--40 ptb-md--30">
+                <div class="container-fluid">
+                    <div class="row mb--40 mb-md--30">
                         <div class="col-12 text-center">
-                            <a href="{{route('list.products',['id'=>'all'])}}" class="heading-button">View All</a>
+                            <h2 class="heading-secondary">Top View</h2>
+                            <hr class="separator center mt--25 mt-md--15">
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="product-tab tab-style-3">
+                                <div class="nav nav-tabs product-tab__head justify-content-center align-items-center flex-md-row flex-column mb--40 mb-md--30" id="product-tab" role="tablist">
+                                </div>
+                                <div class="tab-content product-tab__content fadeInUp" id="product-tabContent">
+                                    <div class="tab-pane show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+                                        <div class="row">
+                                            @if(!empty($top_view_products))
+                                                @foreach($top_view_products as $items)
+                                                    <div class="col-xl-3 col-lg-4 col-sm-6 mb--40 mb-md--30">
+                                                        <div class="airi-product">
+                                                            <div class="product-inner">
+                                                                <figure class="product-image">
+                                                                    <div class="product-image--holder">
+                                                                        <a href="{{route('detail.product',['id'=>$items->id])}}">
+                                                                            <img src="{{$items->symbolic_image}}" alt="Product Image" class="primary-image">
+                                                                            <img src="{{$items->symbolic_image}}" alt="Product Image" class="secondary-image">
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="airi-product-action">
+                                                                        <div class="product-action">
+
+                                                                            <a class="add_to_cart_btn action-btn" href="{{route('add.cart',['id'=>$items->id])}}" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                                                                                <i class="dl-icon-cart29"></i>
+                                                                            </a>
+                                                                       <!--  <a class="add_wishlist action-btn" href="wishlist.html" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
+                                                                            <i class="dl-icon-heart4"></i>
+                                                                        </a> -->
+                                                                        </div>
+                                                                    </div>
+                                                                    @if($items->new==1)
+                                                                    <span class="product-badge hot">New</span>
+                                                                    @endif
+                                                                </figure>
+                                                                <div class="product-info">
+                                                                    <h3 class="product-title">
+                                                                        <a href="{{route('detail.product',['id'=>$items->id])}}">{{$items->name}}</a>
+                                                                    </h3>
+                                                                    <div class="product-rating">
+                                                                            <span>
+                                                                                @for($i=0;$i<$items->star + 1; $i++)
+                                                                                <i class="dl-icon-star rated"></i>
+                                                                                @endfor
+                                                                            </span>
+                                                                        </div>
+                                                                    <span class="product-price-wrapper">
+                                                                        <span class="money">${{$items->unit_price}}</span>
+                                                                       <!--  <span class="product-price-old">
+                                                                                <span class="money">$60.00</span>
+                                                                        </span> -->
+                                                                     <!--    <div class="product-color-swatch">
+                                                                                <a class="product-color-swatch-btn blue">
+                                                                                    <span class="product-color-swatch-label"></span>
+                                                                                </a>
+                                                                                <a class="product-color-swatch-btn green">
+                                                                                    <span class="product-color-swatch-label"></span>
+                                                                                </a>
+                                                                                <a class="product-color-swatch-btn pink">
+                                                                                    <span class="product-color-swatch-label"></span>
+                                                                                </a>
+                                                                                <a class="product-color-swatch-btn red">
+                                                                                    <span class="product-color-swatch-label"></span>
+                                                                                </a>
+                                                                        </div> -->
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </section>
             <!-- Product tab area End Here -->
