@@ -107,6 +107,9 @@
                                         <a href="javascript:;">{{Auth::user()->name}}</a>
                                         </li>
                                         <li>
+                                            <a href="{{route('my.order')}}">Order</a>
+                                        </li>
+                                        <li>
                                             <a href="{{route('logout')}}">Logout</a>
                                         </li>
                                     </ul>

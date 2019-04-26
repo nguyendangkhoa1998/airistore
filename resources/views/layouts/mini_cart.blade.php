@@ -1,9 +1,9 @@
+@if(Session::has('cart'))
 <aside class="mini-cart" id="miniCart">
             <div class="mini-cart-wrapper">
                 <a href="#" class="btn-close"><i class="dl-icon-close"></i></a>
                 <div class="mini-cart-inner">
                     <h5 class="mini-cart__heading mb--40 mb-lg--30">Shopping Cart</h5>
-                    @if(Session::has('cart'))
                     <div class="mini-cart__content">
                         <ul class="mini-cart__list">
                             
@@ -30,11 +30,18 @@
                             <a href="{{route('view.cart')}}" class="btn btn-fullwidth btn-style-1">View Cart</a>
                         </div>
                     </div>
-                    @else
-                    <div class="mini-cart__content">
-                        <p>Empty shopping cart</p>
-                    </div>
-                    @endif
                 </div>
             </div>
         </aside>
+        @else
+        <aside class="mini-cart" id="miniCart">
+            <div class="mini-cart-wrapper">
+                <div class="mini-cart-inner">
+                    <h5 class="mini-cart__heading mb--40 mb-lg--30">Shopping Cart</h5>
+                    <div class="mini-cart__content">
+                        <p>Cart empty</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        @endif

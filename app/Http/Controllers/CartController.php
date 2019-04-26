@@ -20,7 +20,7 @@ class CartController extends Controller
 
     	  $product=Products::find($id);
 
-	      $oldCart=Session('cart')?Session::get('cart'):null;
+	      $oldCart=Session('cart') ? Session::get('cart') : null;
 
 	      $cart=new Cart($oldCart);
 

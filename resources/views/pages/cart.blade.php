@@ -41,7 +41,7 @@
                                                     @if(Session::has('cart'))
                                                     @foreach($product_cart as $product)
                                                     <tr>
-                                                        <td class="product-remove text-left"><a href="#"><i class="dl-icon-close"></i></a></td>
+                                                        <td class="product-remove text-left"><a href="{{route('delete.cart',['id'=>$product['item']['id']])}}"><i class="dl-icon-close"></i></a></td>
                                                         <td class="product-thumbnail text-left">
                                                             <img src="{{$product['item']['symbolic_image']}}" alt="Product Thumnail">
                                                         </td>

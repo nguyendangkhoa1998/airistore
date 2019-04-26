@@ -184,7 +184,7 @@ class PageController extends Controller
     // My order
     public function MyOrder()
     {
-    	echo 'my order';
+    	return view('pages.my_order');
     }
 
     // Detail order

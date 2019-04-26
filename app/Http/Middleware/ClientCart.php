@@ -19,7 +19,7 @@ class ClientCart
         if (Auth::check()) {
             return $next($request);
         }else {
-            return redirect(route('client.login'))->with('warning','Login is required to purchase products!');
+            return redirect(route('login'))->with('warning','Login is required to purchase products!');
         }
     }
 }
