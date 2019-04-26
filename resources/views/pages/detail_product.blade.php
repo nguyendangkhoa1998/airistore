@@ -7,7 +7,7 @@
                     <div class="col-12">
                         <ul class="breadcrumb">
                             <li><a href="{{route('home')}}">Home</a></li>
-                            <li><a href="{{route('shop.all')}}">Shop Pages</a></li>
+                            <li><a href="{{route('list.products',['id'=>'all'])}}">Shop Pages</a></li>
                             <li class="current"><span>Product Details</span></li>
                         </ul>
                     </div>
@@ -40,9 +40,9 @@
                                             }'>
 
                                              {{--  In ra toàn bộ ảnh của sản phẩm  --}}
-                                                @foreach($detail->product_galery as $img)
+                                                @foreach($detail->RelationshipProductGalery as $img)
                                                 <figure class="product-gallery__thumb--single">
-                                                    <img src="{{$img->img_url}}" alt="Products">
+                                                    <img src="{{$img->image_url}}" alt="Products">
                                                 </figure>
                                                 @endforeach
 
@@ -55,10 +55,10 @@
                                                 <div class="main-slider product-gallery__full-image image-popup">
 
                                                       {{--  In ra toàn bộ ảnh của sản phẩm  --}}
-                                                    @foreach($detail->product_galery as $img)
-                                                    <figure class="product-gallery__image zoom">
-                                                        <img src="{{$img->img_url}}" alt="Product">
-                                                    </figure>
+                                                    @foreach($detail->RelationshipProductGalery as $img)
+                                                        <figure class="product-gallery__image zoom">
+                                                            <img src="{{$img->image_url}}" alt="Product">
+                                                        </figure>
                                                     @endforeach
                                                 </div>
                                                 <div class="product-gallery__actions">
@@ -89,11 +89,7 @@
                                         @endfor
 
                                     </span>
-                                    <a href="#" class="review-link">({{$detail->review}} review)</a>
-                                </div>
-                                <div class="product-navigation">
-                                    <a href="#" class="prev"><i class="dl-icon-left"></i></a>
-                                    <a href="#" class="next"><i class="dl-icon-right"></i></a>
+                                    <a href="javascript:;" class="review-link">({{$detail->views}} view)</a>
                                 </div>
                                 <div class="clearfix"></div>
                                 <h3 class="product-title">{{$detail->name}}</h3>
@@ -102,10 +98,10 @@
                                     {{$detail->quantity}} in stock
                                 </span>
                                 <div class="product-price-wrapper mb--40 mb-md--10">
-                                    <span class="money">${{$detail->unit_price}}</span>
-                                    {{--  <span class="old-price">
+                                    <span class="money">$.{{$detail->unit_price}}</span>
+                                    <!--  <span class="old-price">
                                         <span class="money">$60.00</span>
-                                    </span>  --}}
+                                    </span> -->
                                 </div>
                                 <div class="clearfix"></div>
                                 <p class="product-short-description mb--45 mb-sm--20">{{$detail->desc}}</p>
@@ -127,12 +123,12 @@
                                     <div class="product-meta">
                                         <span class="sku_wrapper font-size-12">SKU: <span class="sku">REF. LA-887</span></span>
                                         <span class="posted_in font-size-12">Categories: 
-                                            <a href="{{route('shop',['id'=>$detail->category_child->id])}}">{{$detail->category_child->name}}</a>
+                                            <a href="{{route('list.products',['id'=>$detail->RelationshipCategoriesChild->id])}}">{{$detail->RelationshipCategoriesChild->name}}</a>
                                         </span>
                                         <span class="posted_in font-size-12">Tags: 
-                                            <a href="{{route('shop.all')}}">dress,</a>
-                                            <a href="{{route('shop.all')}}">fashions,</a>
-                                            <a href="{{route('shop.all')}}">men</a>
+                                            <a href="javascript:;">dress,</a>
+                                            <a href="javascript:;">fashions,</a>
+                                            <a href="javascript:;">men</a>
                                         </span>
                                     </div>
                                     <div class="product-share-box">
@@ -174,89 +170,130 @@
                                         <span>Description</span>
                                     </a>
                                     <a class="product-data-tab__link nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-selected="true">
-                                        <span>Reviews(1)</span>
+                                        <span>Comment({{count($comments)}})</span>
                                     </a>
                                 </div>
                                 <div class="tab-content product-data-tab__content" id="product-tabContent">
                                     <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
                                         <div class="product-description">
-                                                {{$detail->detail}}
+                                                {{$detail->desciption}}
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
                                         <div class="product-reviews">
-                                            <h3 class="review__title">1 review for Waxed-effect pleated skirt</h3>
+                                            <h3 class="review__title">
+                                                @if ($errors->any())
+                                                    <div class="alert alert-danger">
+                                                        <ul>
+                                                            @foreach ($errors->all() as $error)
+                                                                <li>{{ $error }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endif
+                                                @if(session('alert'))
+                                                    <div class="alert alert-success" style="margin-bottom: 0px" role="alert">
+                                                      {{session('alert')}}
+                                                  </div>
+                                                @endif
+                                            </h3>
                                             <ul class="review__list">
                                                 <li class="review__item">
-                                                    <div class="review__container">
-                                                        <img src="assets/img/others/comment-icon-2.png" alt="Review Avatar" class="review__avatar">
-                                                        <div class="review__text">
-                                                            <div class="product-rating float-right">
-                                                                <span>
-                                                                    <i class="dl-icon-star rated"></i>
-                                                                    <i class="dl-icon-star rated"></i>
-                                                                    <i class="dl-icon-star rated"></i>
-                                                                    <i class="dl-icon-star rated"></i>
-                                                                    <i class="dl-icon-star rated"></i>
-                                                                </span>
+                                                    @if(count($comments)>0)
+                                                        @foreach($comments as $comment )
+                                                            <div class="review__container">
+                                                                <div class="review__text">
+                                                                    <div class="review__meta">
+                                                                        <strong class="review__author">{{$comment->name }}</strong>
+                                                                        <span class="review__dash">-</span>
+                                                                        <span class="review__published-date">{{$comment->created_at}}</span>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                    <p class="review__description">{{$comment->content}}</p>
+                                                                </div>
                                                             </div>
-                                                            <div class="review__meta">
-                                                                <strong class="review__author">John Snow </strong>
-                                                                <span class="review__dash">-</span>
-                                                                <span class="review__published-date">November 20, 2018</span>
+                                                        @endforeach
+                                                    @else
+                                                        <div class="review__container">
+                                                                <div class="review__text">
+                                                                    <div class="clearfix"></div>
+                                                                    <p class="review__description">There are no comments on this product !</p>
+                                                                </div>
                                                             </div>
-                                                            <div class="clearfix"></div>
-                                                            <p class="review__description">Aliquam egestas libero ac turpis pharetra, in vehicula lacus scelerisque. Vestibulum ut sem laoreet, feugiat tellus at, hendrerit arcu.</p>
-                                                        </div>
-                                                    </div>
+                                                    @endif
                                                 </li>
                                             </ul>
-                                            <div class="review-form-wrapper">
-                                                <span class="reply-title"><strong>Add a review</strong></span>
-                                                <form action="#" class="form">
-                                                    <div class="form-notes mb--20">
-                                                        <p>Your email address will not be published. Required fields are marked <span class="required">*</span></p>
-                                                    </div>
-                                                    <div class="form__group mb--30 mb-sm--20">
-                                                        <div class="revew__rating">
-                                                            <p class="stars selected">
-                                                                <a class="star-1 active" href="#">1</a>
-                                                                <a class="star-2" href="#">2</a>
-                                                                <a class="star-3" href="#">3</a>
-                                                                <a class="star-4" href="#">4</a>
-                                                                <a class="star-5" href="#">5</a>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form__group mb--30 mb-sm--20">
-                                                        <div class="form-row">
-                                                            <div class="col-sm-6 mb-sm--20">
-                                                                <label class="form__label" for="name">Name<span class="required">*</span></label>
-                                                                <input type="text" name="name" id="name" class="form__input">
-                                                            </div>  
-                                                            <div class="col-sm-6">
-                                                                <label class="form__label" for="email">email<span class="required">*</span></label>
-                                                                <input type="email" name="email" id="email" class="form__input">
+                                            @if(Auth::check())
+                                                <div class="review-form-wrapper">
+                                                    <span class="reply-title"><strong>Add a review</strong></span>
+                                                    <form action="{{route('post.comment')}}" method="post" class="form">
+                                                        @csrf
+                                                        <input type="hidden" name="product_id" value="{{$detail->id}}" />
+                                                        <div class="form__group mb--30 mb-sm--20">
+                                                            <div class="form-row">
+                                                                <div class="col-sm-6 mb-sm--20">
+                                                                    <label class="form__label" for="name">Name<span class="required">*</span></label>
+                                                                    <input type="text" name="name" value="{{Auth::user()->name}}" id="name" class="form__input" disabled>
+                                                                </div>  
+                                                                <div class="col-sm-6">
+                                                                    <label class="form__label" for="email">email<span class="required">*</span></label>
+                                                                    <input type="email" name="email" id="email" value="{{Auth::user()->email}}" class="form__input" disabled>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form__group mb--30 mb-sm--20">
-                                                        <div class="form-row">
-                                                            <div class="col-12">
-                                                                <label class="form__label" for="email">Your Review<span class="required">*</span></label>
-                                                                <textarea name="review" id="review" class="form__input form__input--textarea"></textarea>
+                                                        <div class="form__group mb--30 mb-sm--20">
+                                                            <div class="form-row">
+                                                                <div class="col-12">
+                                                                    <label class="form__label" for="comment">Your Comment<span class="required">*</span></label>
+                                                                    <textarea name="comment" id="review" class="form__input form__input--textarea"></textarea>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form__group">
-                                                        <div class="form-row">
-                                                            <div class="col-12">
-                                                                <input type="submit" value="Submit" class="btn btn-style-1 btn-submit">
+                                                        <div class="form__group">
+                                                            <div class="form-row">
+                                                                <div class="col-12">
+                                                                    <input type="submit" value="Submit" class="btn btn-style-1 btn-submit">
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                                    </form>
+                                                </div>
+                                            @else
+                                                <div class="review-form-wrapper">
+                                                    <span class="reply-title"><strong>Add a review</strong></span>
+                                                    <form action="{{route('post.comment')}}" method="post" class="form">
+                                                        @csrf
+                                                        <input type="hidden" name="product_id" value="{{$detail->id}}" />
+                                                        <div class="form__group mb--30 mb-sm--20">
+                                                            <div class="form-row">
+                                                                <div class="col-sm-6 mb-sm--20">
+                                                                    <label class="form__label" for="name">Name<span class="required">*</span></label>
+                                                                    <input type="text" name="name"  id="name" class="form__input" >
+                                                                </div>  
+                                                                <div class="col-sm-6">
+                                                                    <label class="form__label" for="email">email<span class="required">*</span></label>
+                                                                    <input type="email" name="email" id="email" class="form__input" >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form__group mb--30 mb-sm--20">
+                                                            <div class="form-row">
+                                                                <div class="col-12">
+                                                                    <label class="form__label" for="comment">Your Comment<span class="required">*</span></label>
+                                                                    <textarea name="comment" id="review" class="form__input form__input--textarea"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form__group">
+                                                            <div class="form-row">
+                                                                <div class="col-12">
+                                                                    <input type="submit" value="Submit" class="btn btn-style-1 btn-submit">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
