@@ -227,15 +227,10 @@
                                                             </div>
                                                             <div class="airi-product-action">
                                                                 <div class="product-action">
-                                                                    
-                                                                    <a class="add_to_cart_btn action-btn" href="{{route('add.cart',['id'=>$items->id])}}" data-toggle="tooltip" data-placement="top" title="Add to Cart">
-                                                                        <i class="dl-icon-cart29"></i>
-        <!--                                                             </a>
-                                                                    <a class="add_wishlist action-btn" href="wishlist.html" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
-                                                                        <i class="dl-icon-heart4"></i>
-                                                                    </a> -->
-                                                                    
+                                                                    <a class="add_to_cart_btn action-btn" href="javascript:;" data-toggle="tooltip" data-placement="top" title="Add to Cart" data-idProduct="{{$items->id}}">
+                                                                        <i class="dl-icon-cart29"></i> 
                                                                 </div>
+                                                                
                                                             </div>
                                                         </figure>
                                                         <div class="product-info text-center">
@@ -244,9 +239,6 @@
                                                             </h3>
                                                             <span class="product-price-wrapper">
                                                                 <span class="money">${{$items->unit_price}}</span>
-                                                               <!--  <span class="product-price-old">
-                                                                    <span class="money">$0</span>
-                                                                </span> -->
                                                             </span>
                                                         </div>
                                                     </div>
@@ -261,11 +253,6 @@
                             <nav class="pagination-wrap">
                                 <ul class="pagination">
                                     {{$products->links()}}
-                                    {{--  <li><a href="shop-sidebar.html" class="prev page-number"><i class="fa fa-angle-double-left"></i></a></li>
-                                    <li><span class="current page-number">1</span></li>
-                                    <li><a href="shop-sidebar.html" class="page-number">2</a></li>
-                                    <li><a href="shop-sidebar.html" class="page-number">3</a></li>
-                                    <li><a href="shop-sidebar.html" class="next page-number"><i class="fa fa-angle-double-right"></i></a></li>  --}}
                                 </ul>
                             </nav>
                         </div>
@@ -276,120 +263,17 @@
                                     <h3 class="widget-title">Categories child</h3>
                                     <ul class="prouduct-categories product-widget__list">
                                         @foreach($categories_child as $items)
-                                        <li><a href="{{route('list.products',['id'=>$items->id])}}">{{$items->name}}</a></li>
+                                            <li>
+                                                <a href="{{route('list.products',['id'=>$items->id])}}">{{$items->name}}</a>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </div>
-                                <!-- Category Widget Start -->
-
-                                <!-- Price Filter Widget Start -->
-                                {{--  <div class="product-widget product-price-widget mb--40 mb-md--35">
-                                    <h3 class="widget-title">Price</h3>
-                                    <div class="widget_content">
-                                        <form action="#" method="post">
-                                            <div id="slider-range" class="price-slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                                                <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 16.6667%; width: 79.1667%;">
-                                                    
-                                                </div>
-                                                <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 16.6667%;">
-                                                    
-                                                </span>
-                                                <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 95.8333%;">
-                                                    
-                                                </span>
-                                            </div>
-                                            <div class="filter-price">
-                                                <div class="filter-price__count">
-                                                    <div class="filter-price__input-group mb--20">
-                                                        <span>Price: </span>
-                                                        <input type="text" id="amount" class="amount-range" readonly="">
-                                                    </div>
-                                                    <button type="submit" class="btn btn-style-1 sidebar-btn">
-                                                        filter
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>  --}}
-                                <!-- Price Filter Widget End -->
-
-                                <!-- Product Size Widget Start -->
-                                {{--  <div class="product-widget product-widget--size mb--25 mb-md--20">
-                                    <h3 class="widget-title">Size</h3>
-                                    <ul class="product-widget__list two-column-list">
-                                        <li><a href="shop-sidebar.html">L</a><span class="count">(2)</span></li>
-                                        <li><a href="shop-sidebar.html">S</a><span class="count">(2)</span></li>
-                                        <li><a href="shop-sidebar.html">XXl</a><span class="count">(2)</span></li>
-                                        <li><a href="shop-sidebar.html">M</a><span class="count">(2)</span></li>
-                                        <li><a href="shop-sidebar.html">XL</a><span class="count">(2)</span></li>
-                                        <li><a href="shop-sidebar.html">L</a><span class="count">(2)</span></li>
-                                    </ul>
-                                </div>  --}}
-                                <!-- Product Size Widget End -->
-
-                                <!-- Product Color Widget Start -->
-                                {{--  <div class="product-widget product-widget--Color mb--25 mb-md--20">
-                                    <h3 class="widget-title">Color</h3>
-                                    <ul class="product-widget__list two-column-list">
-                                        <li><a href="shop-sidebar.html">Blue</a><span class="count">(2)</span></li>
-                                        <li><a href="shop-sidebar.html">Pink</a><span class="count">(2)</span></li>
-                                        <li><a href="shop-sidebar.html">White</a><span class="count">(2)</span></li>
-                                        <li><a href="shop-sidebar.html">Green</a><span class="count">(2)</span></li>
-                                        <li><a href="shop-sidebar.html">Red</a><span class="count">(2)</span></li>
-                                        <li><a href="shop-sidebar.html">Black</a><span class="count">(2)</span></li>
-                                    </ul>
-                                </div>  --}}
-                                <!-- Product Color Widget End -->
-
-                                <!-- Product Brand Widget Start -->
-                                {{--  <div class="product-widget product-widget--brand mb--40 mb-md--30">
-                                    <h3 class="widget-title">Brands</h3>
-                                    <ul class="product-widget__list">
-                                        <li><a href="shop-sidebar.html">Airi</a><span class="count">(2)</span></li>
-                                        <li><a href="shop-sidebar.html">Mango</a><span class="count">(2)</span></li>
-                                        <li><a href="shop-sidebar.html">Valention</a><span class="count">(2)</span></li>
-                                        <li><a href="shop-sidebar.html">Zara</a><span class="count">(2)</span></li>
-                                    </ul>
-                                </div>  --}}
-                                <!-- Product Brand Widget End -->
-
-                                <!-- Category Widget Start -->
-                                {{--  <div class="product-widget tag-widget mb--35 mb-md--30">
-                                    <h3 class="widget-title">Categories child</h3>
-                                    <div class="tagcloud">
-                                        <a href="shop-sidebar.html">chair</a>
-                                        <a href="shop-sidebar.html">deco</a>
-                                        <a href="shop-sidebar.html">dress</a>
-                                        <a href="shop-sidebar.html">fashion</a>
-                                        <a href="shop-sidebar.html">furniture</a>
-                                        <a href="shop-sidebar.html">light</a>
-                                        <a href="shop-sidebar.html">living</a>
-                                        <a href="shop-sidebar.html">sofa</a>
-                                        <a href="shop-sidebar.html">table</a>
-                                        <a href="shop-sidebar.html">women</a>
-                                    </div>
-                                </div>  --}}
-                                <!-- Category Widget Start -->
-                                
-                                <!-- Promo Widget Start -->
-                                {{--  <div class="product-widget promo-widget">
-                                    <div class="banner-box banner-type-3 banner-type-3-2 banner-hover-1">
-                                        <div class="banner-inner">
-                                            <div class="banner-image">
-                                                <img src="assets/img/banner/ad-banner.jpg" alt="Banner">
-                                            </div>
-                                            <div class="banner-info">
-                                                <h2 class="banner-title-11">New <br> <strong>Season</strong></h2>
-                                            </div>
-                                            <a class="banner-link banner-overlay" href="shop-sidebar.html">Shop Now</a>
-                                        </div>
-                                    </div>
-                                </div>  --}}
                                 <!-- Promo Widget End -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
 @endsection
