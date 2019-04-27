@@ -36,7 +36,6 @@
         @else
         <aside class="mini-cart" id="miniCart">
             <div class="mini-cart-wrapper">
-                <a href="#" class="btn-close"><i class="dl-icon-close"></i></a>
                 <div class="mini-cart-inner">
                     <h5 class="mini-cart__heading mb--40 mb-lg--30">Shopping Cart</h5>
                     <div class="mini-cart__content">
