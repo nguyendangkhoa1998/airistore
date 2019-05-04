@@ -31,25 +31,34 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form action="{{route('logined')}}" method="post">
+            <form action="" method="post">
               @csrf
               <h1>Login</h1>
+
                 @if (isset($msg))
-                <h5 class="text-danger">{{$msg}}</h5>
+                  <h5 class="text-danger">{{$msg}}</h5>
                 @endif
+
                 @if (session('msg'))
-                <h5 class="text-danger">{{session('msg')}}</h5>    
+
+                  <h5 class="text-danger">{{session('msg')}}</h5>
+
                 @endif
+
               <div>
+
                 <input type="email" name="email" value="{{old('email')}}" class="form-control" placeholder="Email" required="" />
+
                 @if ($errors->first('email'))
-                        <span class="text-danger">{{$errors->first('email')}}</span>
+
+                  <span class="text-danger">{{$errors->first('email')}}</span>
+
                 @endif
               </div>
               <div>
                 <input type="password" name="password" class="form-control" placeholder="Password" required="" />
                 @if ($errors->first('password'))
-                <p class="text-danger">{{$errors->first('password')}}</p>
+                  <p class="text-danger">{{$errors->first('password')}}</p>
                 @endif
               </div>
               <div>
@@ -58,16 +67,6 @@
               </div>
 
               <div class="clearfix"></div>
-
-              <div class="separator">
-                <p class="change_link">New to site?
-                  <a href="{{route('signup')}}" class="to_register"> Create Account </a>
-                </p>
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
                   <h1><i class="fa fa-paw"></i> A i r i</h1>
                   <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
                 </div>

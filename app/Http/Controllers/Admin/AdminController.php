@@ -14,20 +14,4 @@ class AdminController extends Controller
         return 'Admin Dashboard';
 
     }
-
-    //Login
-    public function Login()
-    {
-
-    	return 'login';
-
-    }
-
-    //Login
-    public function PostLogin()
-    {
-
-    	return 'logined';
-
-    }
 }

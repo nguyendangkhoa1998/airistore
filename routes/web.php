@@ -1,8 +1,8 @@
 <?php
 					/*----Admin login------*/
-Route::get('admin-login','Admin\AdminController@Login')->name('admin.login');
+Route::get('admin-login','AdminLoginController@Login')->name('admin.login');
 
-Route::post('admin-login','Admin\AdminController@PostLogin');
+Route::post('admin-login','AdminLoginController@PostLogin');
 
 
 					/*------Customer register------*/
