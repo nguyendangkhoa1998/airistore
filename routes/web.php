@@ -26,7 +26,7 @@ Route::get('/','PageController@Index')->name('home');
 Route::get('/list-products/{id}','PageController@ListProducts')->name('list.products');
 
 					/*------ Detail Product ------*/
-Route::get('/detail-product/{id}','PageController@DetailProducts')->name('detail.product');
+Route::get('/detail-product/{id}.html','PageController@DetailProducts')->name('detail.product');
 
 					/*------ Post Comment Product ------*/
 Route::post('post-comment','PageController@PostComment')->name('post.comment');
