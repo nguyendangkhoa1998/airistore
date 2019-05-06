@@ -16,18 +16,22 @@ class AdminCheckLogin
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()) {
+        if (Auth::check()) {
 
+            if (Auth::user()->role > 1) {
 
-                return redirect(route('admin.login'))->with('msg', 'Please login to continue !') ;
+                return $next($request);
 
+            }else{
+
+                return redirect(route('admin.login'))->with('alert', 'There is not enough permissions to continue access');
+                
+            }
+
+        }else{
+
+            return redirect()->route('admin.login')->with('alert','Please login to continue !');
+            
         }
-        if (Auth::user()->role <= 1) {
-
-                    return redirect(route('admin.login'))->with('msg', 'Không có quyền truy cập');
-
-        }
-
-        return $next($request);
     }
 }

@@ -8,10 +8,17 @@ use App\Http\Controllers\Controller;
 class AdminController extends Controller
 {
 	// Dashboard
-    public function Index()
+    public function index()
     {
 
         return 'Admin Dashboard';
 
     }
+
+    public function Logout()
+    {
+        Auth::logout();
+        return 'Logout';
+    }
+
 }

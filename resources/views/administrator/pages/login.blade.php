@@ -25,34 +25,21 @@
 
   <body class="login">
     <div>
-      <a class="hiddenanchor" id="signup"></a>
       <a class="hiddenanchor" id="signin"></a>
 
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form action="" method="post">
+            <form action="{{route('admin.login')}}" method="POST">
               @csrf
               <h1>Login</h1>
-
-                @if (isset($msg))
-                  <h5 class="text-danger">{{$msg}}</h5>
+                @if (session('alert'))
+                  <h5 class="text-danger">{{session('alert')}}</h5>
                 @endif
-
-                @if (session('msg'))
-
-                  <h5 class="text-danger">{{session('msg')}}</h5>
-
-                @endif
-
               <div>
-
-                <input type="email" name="email" value="{{old('email')}}" class="form-control" placeholder="Email" required="" />
-
+                <input type="email" name="email" class="form-control" placeholder="Email" required="" />
                 @if ($errors->first('email'))
-
                   <span class="text-danger">{{$errors->first('email')}}</span>
-
                 @endif
               </div>
               <div>
@@ -65,10 +52,9 @@
                 <button type="submit" class="btn btn-default submit">Log in</button>
                 <a class="reset_pass" href="#">Lost your password?</a>
               </div>
-
               <div class="clearfix"></div>
                   <h1><i class="fa fa-paw"></i> A i r i</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                  <p>©2016 All Rights Reserved . Privacy and Terms</p>
                 </div>
               </div>
             </form>

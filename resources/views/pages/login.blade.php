@@ -23,10 +23,10 @@
                 <div class="col-md-12">
                     <div class="register-box">
                         <h4 class="mb--35 mb-sm--20">To buy products, sign in now</h4>
-                        @if(session('alert'))
-                            <div class="alert alert-danger" style="margin-bottom: 0px" role="alert">
-                                {{session('alert')}}
-                            </div>
+                            @if(session('alert'))
+                                <div class="alert alert-danger" style="margin-bottom: 0px" role="alert">
+                                    {{session('alert')}}
+                                </div>
                             @endif
                             @if(session('warning'))
                                 <div class="alert alert-warning" style="margin-bottom: 0px" role="alert">
