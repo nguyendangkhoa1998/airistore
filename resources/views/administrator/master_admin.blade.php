@@ -9,7 +9,7 @@
     <base href="{{asset('/')}}">
     <title>@yield('title')</title>
 
-    @include('admin.layouts.css_master')
+    @include('administrator.layouts.css_master')
   </head>
 
   <body class="nav-md">
@@ -18,7 +18,7 @@
         <div class="col-md-3 left_col menu_fixed">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="{{route('admin.home')}}" class="site_title"><i class="fa fa-paw"></i> <span> A i r i!</span></a>
+              <a href="{{route('dashboard')}}" class="site_title"><i class="fa fa-paw"></i> <span> A i r i!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -39,7 +39,7 @@
             <br />
 
             <!-- sidebar menu -->
-            @include('admin.layouts.sidebar_menu')
+            @include('administrator.layouts.sidebar_menu')
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
@@ -62,7 +62,7 @@
         </div>
 
         <!-- top navigation -->
-            @include('admin.layouts.top_nav')
+            @include('administrator.layouts.top_nav')
         <!-- /top navigation -->
 
         <!-- page content -->
@@ -75,11 +75,11 @@
         <!-- /page content -->
 
         <!-- footer content -->
-            @include('admin.layouts.footer')
+            @include('administrator.layouts.footer')
         <!-- /footer content -->
       </div>
     </div>
-            @include('admin.layouts.js_master')
+            @include('administrator.layouts.js_master')
             @yield('script')
   </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-Route::get('/','AdminController@index')->name('dashboard');
+Route::get('/dashboard','AdminController@Index')->name('dashboard');
 
 Route::get('/admin-logout','AdminController@Logout')->name('admin.logout');
 

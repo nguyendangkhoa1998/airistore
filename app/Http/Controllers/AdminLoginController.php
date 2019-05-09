@@ -29,16 +29,13 @@ class AdminLoginController extends Controller
             'password.min'      =>'Mật khẩu phải có từ 6 - 16 kí tự',
             'password.max'      =>'Mật khẩu phải có từ 6 - 16 kí tự',
         ]);
-            var_dump($request->email,$request->password);die();
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
-
-            return redirect(route('dashboard'));
-            
+            return redirect(route('dashboard'));   
 		}else{
-
             return redirect(route('admin.login'))->with('alert', 'Sai tài khoản hoặc mật khẩu');
             
         }
 
     }
+    
 }

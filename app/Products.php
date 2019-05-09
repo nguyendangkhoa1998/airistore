@@ -34,4 +34,13 @@ class Products extends Model
             ->get();
         return $relates;
     }
+    public function scopeStatus($query)
+    {
+        return $this->where('status', 1);
+    }
+
+    public function scopeQuantity($query)
+    {
+        return $this->where('quantity','>',0);
+    }
 }

@@ -1,4 +1,4 @@
-@extends('admin.master_admin')
+@extends('administrator.master_admin')
 @section('title','Home Page')
 @section('page-title')
 <div class="page-title">
