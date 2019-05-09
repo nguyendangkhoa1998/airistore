@@ -245,7 +245,7 @@
                                                             <div class="form-row">
                                                                 <div class="col-12">
                                                                     <label class="form__label" for="comment">Your Comment<span class="required">*</span></label>
-                                                                    <textarea name="comment" id="review" class="form__input form__input--textarea"></textarea>
+                                                                    <textarea name="content" id="review" class="form__input form__input--textarea"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -263,7 +263,7 @@
                                                     <span class="reply-title"><strong>Add a review</strong></span>
                                                     <form action="{{route('post.comment')}}" method="post" class="form">
                                                         @csrf
-                                                        <input type="hidden" name="product_id" value="{{$detail->id}}" />
+                                                       <input type="hidden" name="product_id" value="{{$detail->id}}" />
                                                         <div class="form__group mb--30 mb-sm--20">
                                                             <div class="form-row">
                                                                 <div class="col-sm-6 mb-sm--20">
@@ -280,7 +280,7 @@
                                                             <div class="form-row">
                                                                 <div class="col-12">
                                                                     <label class="form__label" for="comment">Your Comment<span class="required">*</span></label>
-                                                                    <textarea name="comment" id="review" class="form__input form__input--textarea"></textarea>
+                                                                    <textarea name="content" id="review" class="form__input form__input--textarea"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>

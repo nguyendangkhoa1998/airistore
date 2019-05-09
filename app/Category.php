@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $table='category';
+    protected $fillable = ['name','url_link','active'];
 
     public function RelationshipCategoriesChild(){
         return $this->hasMany('App\CategoriesChild','category_id','id');

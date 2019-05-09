@@ -113,13 +113,9 @@ class PageController extends Controller
             ->orderBy('created_at','desc')
             ->get();
 
-        $detail = Products::where('id',$id)
-            ->status()
-            ->quantity()
-            ->first();
-
+        $detail = Products::find($id);
         // Views ++
-        // $detail->views=++$detail->views;
+        $detail->views=++$detail->views;
 
         $detail->save();
 
@@ -133,6 +129,13 @@ class PageController extends Controller
     /* --- Comment product --- */
     public function PostComment(Request $request)
     {
+        $product=Products::where('id',$request->product_id)
+            ->status()
+            ->quantity()
+            ->first();
+        $product=new Products;
+        $product->views=--$product->views;
+
         $request->validate([
             'name'  => 'required|max:20|min:2',
             'email' => 'required|max:30|min:2'
@@ -147,24 +150,18 @@ class PageController extends Controller
 
         if (Auth::check())
         {
-            $detail  = new Detail;
             $comment = new Comments;
             $comment->user_id=Auth::id();
-            $comment->name=Auth::user()->name;
-            $comment->email=Auth::user()->email;
             $comment->product_id=$request->product_id;
-            $comment->content=$request->comment;
+            $comment->fill($request->all());
             $comment->save();
         }
         else
         {
-            $detail  = new Products;
             $comment = new Comments;
             $comment->user_id=null;
-            $comment->name=$request->name;
-            $comment->email=$request->email;
             $comment->product_id=$request->product_id;
-            $comment->content=$request->comment;
+            $comment->fill($request->all());
             $comment->save();
         }
 

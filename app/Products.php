@@ -7,8 +7,33 @@ use Illuminate\Database\Eloquent\Model;
 class Products extends Model
 {
     protected $table='products';
+    protected $fillable = ['category_id','categories_child_id','name','symbolic_image','unit_price','quantity','short_desciption','desciption','stars','views','is_new','status'];
 
-    public function RelationshipCategory(){
+    //Get relates products
+    public function relates()
+    {
+        $relates=Products::where('categories_child_id',$this->categories_child_id)
+            ->where('id','<>',$this->id)
+            ->orderBy('views', 'desc')
+            ->orderBy('id', 'desc')
+            ->take(4)
+            ->get();
+        return $relates;
+    }
+
+    //Scope attribute status from products
+    public function scopeStatus($query)
+    {
+        return $this->where('status', 1);
+    }
+
+    //Scope attribute quantity from products
+    public function scopeQuantity($query)
+    {
+        return $this->where('quantity','>',0);
+    }
+
+     public function RelationshipCategory(){
         return $this->belongsTo('App\Category','category_id','id');
     }
 
@@ -24,23 +49,4 @@ class Products extends Model
         return $this->hasMany('App\Comments','product_id','id');
     }
 
-    //Get relates products
-    public function relates(){
-        $relates=Products::where('categories_child_id',$this->categories_child_id)
-            ->where('id','<>',$this->id)
-            ->orderBy('views', 'desc')
-            ->orderBy('id', 'desc')
-            ->take(4)
-            ->get();
-        return $relates;
-    }
-    public function scopeStatus($query)
-    {
-        return $this->where('status', 1);
-    }
-
-    public function scopeQuantity($query)
-    {
-        return $this->where('quantity','>',0);
-    }
 }
