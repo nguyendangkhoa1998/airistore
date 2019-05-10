@@ -1,4 +1,4 @@
-@extends('admin.master_admin')
+@extends('administrator.master_admin')
 @section('title','List category')
 @section('page-title')
 <div class="page-title">
@@ -62,7 +62,6 @@
                           <!-- Modal -->
                             <div class="modal fade" id="myModal{{$items->id}}" role="dialog">
                               <div class="modal-dialog">
-
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                   <div class="modal-header">
@@ -79,7 +78,6 @@
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                   </div>
                                 </div>
-
                               </div>
                             </div>
                           </td>
@@ -90,7 +88,6 @@
                         </tr>
                       </tbody>
                     </table>
-
                   </div>
                 </div>
               </div>

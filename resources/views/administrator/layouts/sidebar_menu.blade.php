@@ -2,40 +2,30 @@
         <div class="menu_section">
           <h3>General</h3>
           <ul class="nav side-menu">
-            <li><a><i class="fa fa-th-list"></i> Category <span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-th-list"></i>Catalog <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="">List</a></li>
-                <li><a href="">Add</a></li>
+                <li><a href="{{route('index.category')}}">Manage Category</a></li>
+                <li><a href="{{route('index.product')}}">Manage Products</a></li>
               </ul>
             </li>
-
-              <li><a><i class="fa fa-align-justify"></i> Category child <span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-money"></i> Sales <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                      <li><a href="">List</a></li>
-                      <li><a href="">Add</a></li>
+                      <li><a href="">Orders</a></li>
                   </ul>
               </li>
-
-              <li><a><i class="fa fa-cubes"></i> Product <span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-users"></i> Customers <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                      <li><a href="">List</a></li>
-                      <li><a href="">Add</a></li>
+                      <li><a href="">Manage Customers</a></li>
                   </ul>
               </li>
-
-              <li><a href=""><i class="fa fa-shopping-cart"></i> Ivoices</a>
-              </li>
-
-              <li><a><i class="fa fa-sliders"></i> Slide <span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-sliders"></i> Banners <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                      <li><a href="">List</a></li>
-                      <li><a href="">Add</a></li>
+                      <li><a href="">Manage banners</a></li>
                   </ul>
               </li>
-
-              <li><a><i class="fa fa-cubes"></i> User <span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-gear"></i> System <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                      <li><a href="">List</a></li>
+                      <li><a href="">Configuration</a></li>
                   </ul>
               </li>
 

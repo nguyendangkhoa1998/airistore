@@ -15,4 +15,8 @@ class Category extends Model
     public function RelationshipProducts(){
         return $this->hasMany('App\Products','category_id','id');
     }
+
+    public function scopeActive($query){
+    	return $this->where('active',1);
+    }
 }
