@@ -1,4 +1,4 @@
-@extends('admin.master_admin')
+@extends('administrator.master_admin')
 @section('title','Add category')
 @section('page-title')
 <div class="page-title">
@@ -13,7 +13,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_title">
-              <a href="{{route('list.category')}}" class="btn btn-danger">Back</a>
+              <a href="{{route('index.category')}}" class="btn btn-danger">Back</a>
               <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>

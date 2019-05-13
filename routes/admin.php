@@ -15,6 +15,8 @@ Route::group(['prefix' => 'category'],function(){
 
 	Route::get('add','CategoryController@Add')->name('add.category');
 
+	Route::post('add','CategoryController@Add')->name('add.category');
+
 	Route::get('edit/{id}','CategoryController@GetEdit')->name('edit.category');
 
 	Route::post('edit/{id}','CategoryController@PostEdit')->name('edit.category');
