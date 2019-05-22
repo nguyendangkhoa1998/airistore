@@ -18,7 +18,7 @@ class CreateTableCategoriesChild extends Migration
             $table->integer('category_id');
             $table->string('name');
             $table->string('url_link')->nullable();
-            $table->integer('active')->default(0);
+            $table->smallInteger('active')->default(0);
             $table->timestamps();
         });
     }

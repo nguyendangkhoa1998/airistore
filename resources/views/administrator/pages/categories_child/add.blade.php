@@ -1,9 +1,9 @@
 @extends('administrator.master_admin')
-@section('title','Add category')
+@section('title','Add categories child')
 @section('page-title')
 <div class="page-title">
   <div class="title_left">
-    <h3>Add category</h3>
+    <h3>Add categories child</h3>
   </div>
 </div>
 <div class="clearfix"></div>
@@ -13,7 +13,7 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <a href="{{route('index.category')}}" class="btn btn-danger">Back</a>
+        <a href="{{route('index.categories.child')}}" class="btn btn-danger">Back</a>
         <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -23,28 +23,37 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-          <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-        @endif
-        @if(session('alert_success'))
+        @if(count($errors)>0)
+        <ul>
+          @foreach($errors->all() as $er)
+          <li class="alert alert-danger">{{$er}}</li></br>
+          @endforeach
+          @if(session('alert_success'))
         <div class="alert alert-success" style="margin-bottom: 0px" role="alert">
           {{session('alert_success')}}
         </div>
         @endif
+        </ul>
+        @endif
         <br />
-        <form action="" method="post" id="demo-form2" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left">
+        <form action="" method="post" class="form-horizontal form-label-left">
           @csrf
           <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Name category <span class="required">*</span>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Category <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" name="name" id="" required="required" class="form-control col-md-7 col-xs-12">
+              <select name="category_id" class="form-control" required="required">
+                @foreach($category as $cate)
+                  <option value="{{$cate->id}}">{{$cate->name}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Name categories child<span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="text" name="name" required="required" class="form-control col-md-7 col-xs-12">
             </div>
           </div>
           <div class="form-group">

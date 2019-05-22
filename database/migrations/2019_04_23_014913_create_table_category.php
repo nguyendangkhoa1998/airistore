@@ -17,7 +17,7 @@ class CreateTableCategory extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('url_link')->nullable();
-            $table->integer('active')->default(0);
+            $table->smallInteger('active')->default(0);
             $table->timestamps();
         });
     }
