@@ -54,7 +54,7 @@ class CategoryController extends Controller
 		$category = new Category;
 		$category->fill($request->all());
 		$category->save();
-		return redirect(route('add.category'))->with('alert_success','Add successfuly category !');
+		return redirect(route('index.category'))->with('alert_success','Add successfuly category !');
 
 	}
 

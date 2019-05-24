@@ -24,13 +24,13 @@ class Products extends Model
     //Scope attribute status from products
     public function scopeStatus($query)
     {
-        return $this->where('status', 1);
+        return $query->where('status','=', 1);
     }
 
     //Scope attribute quantity from products
     public function scopeQuantity($query)
     {
-        return $this->where('quantity','>',0);
+        return $query->where('quantity','>',0);
     }
 
      public function RelationshipCategory(){

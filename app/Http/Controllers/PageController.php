@@ -48,61 +48,66 @@ class PageController extends Controller
 
 
     /* --- Get list products --- */
-    public function ListProducts($id,Request $request)
+    public function ListProducts($idCategories,Request $request)
     {
-        // Get all navigation
-        $categories_child = CategoriesChild::where('active',1)->get();
+        $categories_child = CategoriesChild::where('active','>',0)
+        ->orderBy('id','asc')
+        ->get( );
 
-        // Get name current categories
-        if( $id == 'all' )
-        {
+        if ($idCategories==='all') {
+
             $name_categories_child = 'All products';
-        }
-        else
-        {
-            $get_child = CategoriesChild::select('name')
-                ->where('id',$id)
-                ->first();
-            $name_categories_child = $get_child->name;
-        }
 
-        // Search products 
-        if ( $request->keyword )
-        {
-            $products = Products::where('categories_child_id',$id)
-                ->where('name','like',"%$request->keyword%")
+           if ($request->keyword) {
+
+                $products=Products::where('name','like',"%$request->keyword%")
                 ->status()
                 ->quantity()
-                ->paginate(12);
-                $products->setPath(route('list.products',['categories_child_id'=>$id]));
-                $products->withPath( route('list.products',['categories_child_id'=>$id]).'?keyword=' . $request->keyword);
-        }
+                ->paginate(16);
+                $products->setPath(route('list.products',['id'=>'all']))
+                ->withPath(route('list.products',['id'=>'all']).'?keyword='.$request->keyword);
 
-        // Get products by id categories chlid
-        $products = Products::where('categories_child_id',$id)
-            ->status()
-            ->quantity()
-            ->paginate(12);
+            }else{
 
-        //Get all products
-        if($id == 'all')
-        {
-            //search products 
-            if($id == 'all' && $request->keyword)
-            {
-                $products = Products::where('name','like',"%$request->keyword%")
-                    ->status()
-                    ->quantity()
-                    ->paginate(12);
-                    $products->setPath(route('list.products',['categories_child_id'=>'all']));
-                    $products->withPath( route('list.products',['categories_child_id'=>'all']).'?keyword=' . $request->keyword);
-            } 
-
-            $products = Products::status()
+                $products = Products::status()
                 ->quantity()
-                ->paginate(12);
+                ->paginate(16);
+                
+            }
+
+            return view('pages.shop',compact('categories_child','products','name_categories_child'));
+
+        }else{
+
+            $getCategories = CategoriesChild::find($idCategories);
+
+            $name_categories_child = $getCategories->name;
+
+            if ($request->keyword) {
+
+               $products=Products::where('name','like',"%$request->keyword%")
+                ->where('categories_child_id','=',$idCategories)
+                ->status()
+                ->quantity()
+                ->paginate(16);
+                $products->setPath(route('list.products',['id'=>$idCategories]))
+                ->withPath(route('list.products',['id'=>$idCategories]).'?keyword='.$request->keyword);
+
+            }else{
+
+                 $products=Products::where('name','like',"%$request->keyword%")
+                ->where('categories_child_id','=',$idCategories)
+                ->status()
+                ->quantity()
+                ->paginate(16);
+
+            }
+
+            return view('pages.shop',compact('categories_child','products','name_categories_child'));
+
         }
-        return view('pages.shop',compact('products','categories_child','name_categories_child'));
+
+        
     }
 
 
@@ -110,8 +115,8 @@ class PageController extends Controller
     public function DetailProducts($id,Request $request)
     {
         $comments = Comments::where('product_id',$id)
-            ->orderBy('created_at','desc')
-            ->get();
+        ->orderBy('created_at','desc')
+        ->get();
 
         $detail = Products::find($id);
         // Views ++
@@ -130,9 +135,9 @@ class PageController extends Controller
     public function PostComment(Request $request)
     {
         $product=Products::where('id',$request->product_id)
-            ->status()
-            ->quantity()
-            ->first();
+        ->status()
+        ->quantity()
+        ->first();
         $product=new Products;
         $product->views=--$product->views;
 

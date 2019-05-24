@@ -61,7 +61,7 @@ class CategoriesChildController extends Controller
 		$categories_child->fill($request->all());
 		$categories_child->save();
 
-		return redirect(route('add.categories.child'))->with('alert_success','Add successfuly');
+		return redirect(route('index.categories.child'))->with('alert_success','Add successfuly');
     }
 
     public function GetEdit($id)

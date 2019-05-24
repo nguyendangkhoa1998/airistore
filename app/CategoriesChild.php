@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CategoriesChild extends Model
 {
     protected $table='categories_child';
+    
     protected $fillable = ['category_id','name','url_link','active'];
 
     public function RelationshipCategory(){
@@ -19,7 +20,6 @@ class CategoriesChild extends Model
 
     public function getName(){
     	$name=CategoriesChild::where('active',1)->get();
-
     	return $name;
     }
 }
