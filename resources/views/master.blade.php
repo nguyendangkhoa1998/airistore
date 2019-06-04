@@ -52,7 +52,7 @@
         <!-- Footer End -->
 
         <!-- Search from Start --> 
-        @include('layouts.searchform_popup')
+        @yield('searchform_popup')
         <!-- Search from End --> 
         
         <!-- Side Navigation Start -->

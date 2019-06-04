@@ -1,7 +1,7 @@
 @extends('master')
 @section('title','Shop')
 @section('Breadcrumb')
-	<div class="breadcrumb-area bg--white-6 pt--60 pb--70 pt-lg--40 pb-lg--50 pt-md--30 pb-md--40">
+    <div class="breadcrumb-area bg--white-6 pt--60 pb--70 pt-lg--40 pb-lg--50 pt-md--30 pb-md--40">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 text-center">
@@ -16,7 +16,7 @@
     </div>
 @endsection
 @section('content')
-	<div id="content" class="main-content-wrapper">
+    <div id="content" class="main-content-wrapper">
             <div class="page-content-inner enable-page-sidebar">
                 <div class="container-fluid">
                     <div class="row shop-sidebar pt--45 pt-md--35 pt-sm--20 pb--60 pb-md--50 pb-sm--40">
@@ -392,4 +392,16 @@
                     </div>
                 </div>
             </div>
+@endsection
+@section('searchform_popup')
+<div class="searchform__popup" id="searchForm">
+    <a href="#" class="btn-close"><i class="dl-icon-close"></i></a>
+    <div class="searchform__body">
+        <p>Start typing and press Enter to search</p>
+        <form class="searchform" action="" method="get">
+            <input type="text" name="keyword" value="" id="search" class="searchform__input" placeholder="Enter Products...">
+            <button type="submit" class="searchform__submit"><i class="dl-icon-search10"></i></button>
+        </form>
+    </div>
+</div>
 @endsection
