@@ -17,6 +17,8 @@ class Category extends Model
     }
 
     public function scopeActive($query){
-    	return $this->where('active',1);
+
+    	return $query->where('active',1);
+        
     }
 }

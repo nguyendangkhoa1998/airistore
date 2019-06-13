@@ -6,7 +6,7 @@
               <ul class="nav child_menu">
                 <li><a href="{{route('index.category')}}">Manage Category</a></li>
                 <li><a href="{{route('index.categories.child')}}">Manage Categories Child</a></li>
-                <li><a href="{{route('index.product')}}">Manage Products</a></li>
+                <li><a href="{{route('index.products')}}">Manage Products</a></li>
               </ul>
             </li>
               <li><a><i class="fa fa-money"></i> Sales <span class="fa fa-chevron-down"></span></a>

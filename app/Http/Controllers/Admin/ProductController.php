@@ -4,11 +4,215 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Products;
+use App\ProductGalery;
+use App\Category;
+use App\CategoriesChild;
+
 
 class ProductController extends Controller
 {
-    public function Index()
-    {
-    	return 'success';
-    }
+	public function Index(Request $request)
+	{
+		if (isset($request->keyword)) {
+
+			$keyword = $request->keyword;
+
+			if ($keyword==null) {
+
+				$keyword = null;
+
+			}
+
+			$products = Products::where('name','like',"%$keyword%")
+			->orderBy('id','desc')
+			->paginate(10);
+
+			$products->setPath(route('index.products'))
+			->withPath(route('index.products').'?keyword='.$keyword);
+
+		}else{
+
+			$keyword = null;
+
+			$products = Products::orderBy('id','desc')->paginate(10);
+
+		}
+
+		return view('administrator.pages.products.list_products',compact('products','keyword'));
+	}
+
+	public function AjaxGetCategoriesChild($id_category)
+	{
+
+		$result['categories'] = "";
+
+		if ($id_category==0) {
+
+			$result['categories'] = "<option value=''>Please Select Categories Child</option>";
+
+			$result['disabled'] = 'yes';
+				
+		}else{
+			$categoriesChild = CategoriesChild::where('category_id','=',$id_category)
+				->where('active','=',1)
+				->get();
+
+			if (count($categoriesChild)==0) {
+
+				$result['categories'] = "<option value=''>Null</option>";
+
+			}else{
+			
+				foreach ($categoriesChild as $item) {
+
+					$result['categories'] .= "<option value='".$item->id."'>".$item->name."</option>";
+				}
+
+				$result['disabled'] = 'no';
+			}
+
+		}
+
+		return json_encode($result);
+	}
+
+	public function Add()
+	{
+		$category = Category::active()->orderBy('id','asc')->get();
+
+		$categoriesChild = CategoriesChild::where('active','=',1)->get();
+
+		return view('administrator.pages.products.add',compact('category','categoriesChild'));
+	}
+
+	public function PostAdd(Request $request){
+
+		$request->validate(
+			[
+				'category_id' 			=> 'required',
+				'categories_child_id' 	=> 'required',
+				'name' 					=> 'required',
+				'unit_price' 			=> 'required',
+				'quantity' 				=> 'required',
+				'is_new'				=> 'required',
+				'status'				=> 'required'
+			],
+			[
+				'category_id.required' 			=> 'Category not null',
+				'categories_child_id.required' 	=> 'Categories child not null',
+				'name.required' 				=> 'Name not null',
+				'unit_price.required' 			=> 'Unit price not null',
+				'quantity.required'				=> 'Quantity not null',
+				'is_new.required'				=> 'Please select is new',
+				'status.required'				=>'Please select status'
+			]
+		);
+
+		$products = new Products();
+
+		$products->fill($request->all());
+
+		if ($request->hasFile('symbolic_image')) {
+
+			$file_name = uniqid().".".$request->symbolic_image->extension();
+
+			$path = $request->symbolic_image->storeAs('images/products',$file_name);
+
+			$products->symbolic_image = $path;
+
+		}
+
+		$products->save();
+
+		if (isset($request->galery)) {
+			
+			foreach ($request->galery as $gl) {
+				
+				$galeryItem = new ProductGalery();
+
+				$galeryItem->product_id = $products->id;
+
+				$file_name = uniqid().".".$gl->extension();
+
+				$path = $gl->storeAs('images/product_galery/product_'.$products->id,$file_name);
+
+				$galeryItem->image_url = $path;
+
+				$galeryItem->save();
+
+			}
+
+		}
+
+		return redirect(route('index.products'))->with('alert_success','Add success product');
+
+	}
+
+	public function GetEdit($id)
+	{
+
+		if (!$id) {
+			return abort(404);
+		}
+
+		$categorys = Category::active()->orderBy('id','asc')->get();
+
+		$categoriesChilds = CategoriesChild::where('active','=',1)->get();
+
+		$product = Products::find($id);
+
+		return view('administrator.pages.products.edit',compact('product','categorys','categoriesChilds'));
+	}
+
+	public function PostEdit(Request $request)
+	{
+		
+	}
+
+	public function AddGalery(Request $request){
+
+		$request->validate([
+
+            'galery_edit'=>	'required'
+
+        	],[
+
+            'galery_edit.required'	=>	'galery is not be null'
+
+        	]);
+
+        if ($request->hasFile('galery_edit')){
+
+	            $galeryItem = new ProductGalery();
+
+	            $galeryItem->product_id = $request->product_id;
+
+	            $filename = uniqid().".".$request->galery_edit->extension();
+
+	            $path = $request->file('galery_edit')->move('images/galery/pro_'.$request->product_id,$filename);
+
+	            $galeryItem->image_url = $path;
+
+	            $galeryItem->save();
+
+            }
+
+        return redirect()->back()->with('alert_access','Add galery success');
+
+	}
+
+	public function DeleteGalery($id){
+
+		if (!$id) {
+			return abort(404);
+		}
+
+		$galery = ProductGalery::find($id);
+
+		$galery->delete();
+
+		return redirect()->back()->with('alert_access','Deleted Galery');
+
+	}
 }

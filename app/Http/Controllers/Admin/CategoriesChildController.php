@@ -9,42 +9,42 @@ use App\Category;
 
 class CategoriesChildController extends Controller
 {
-    public function Index(Request $request){
+	public function Index(Request $request){
 
-    	$keyword = $request->keyword;
+		$keyword = $request->keyword;
 
-    	if (isset($keyword)) {
+		if (isset($keyword)) {
 
-    		if ($keyword==null) {
+			if ($keyword==null) {
 
-    			$keyword=null;
+				$keyword=null;
 
-    		}
+			}
 
-    		$categories_child = CategoriesChild::where('name','like','%$keyword%')
-    		->orderBy('id','desc')
-    		->paginate(10);
-    		$categories_child->setPath(route('index.categories.child'));
-    		$categories_child->withPath(route('index.categories.child').'?keyword='.$keyword);
-    	}else{
+			$categories_child = CategoriesChild::where('name','like','%$keyword%')
+			->orderBy('id','desc')
+			->paginate(10);
+			$categories_child->setPath(route('index.categories.child'));
+			$categories_child->withPath(route('index.categories.child').'?keyword='.$keyword);
+		}else{
 
-	    	$categories_child = CategoriesChild::orderBy('id','desc')->paginate(10);
-	    	$keyword=null;
+			$categories_child = CategoriesChild::orderBy('id','desc')->paginate(10);
+			$keyword=null;
 
-    	}
+		}
 
-    	return view('administrator.pages.categories_child.list',compact('categories_child','keyword'));
+		return view('administrator.pages.categories_child.list',compact('categories_child','keyword'));
 
-    }
+	}
 
-    public function Add(){
-    	$category = Category::where('active','>',0)->orderBy('id','desc')->get();
-    	return view('administrator.pages.categories_child.add',compact('category'));
-    }
+	public function Add(){
+		$category = Category::where('active','>',0)->orderBy('id','desc')->get();
+		return view('administrator.pages.categories_child.add',compact('category'));
+	}
 
-    public function PostAdd(Request $request)
-    {
-    	$request->validate(
+	public function PostAdd(Request $request)
+	{
+		$request->validate(
 			[
 				'category_id' => 'required',
 				'name' => 'required',
@@ -62,12 +62,12 @@ class CategoriesChildController extends Controller
 		$categories_child->save();
 
 		return redirect(route('index.categories.child'))->with('alert_success','Add successfuly');
-    }
+	}
 
-    public function GetEdit($id)
-    {
+	public function GetEdit($id)
+	{
 
-    	if (!$id) {
+		if (!$id) {
 			abort (404); 
 		}
 
@@ -75,16 +75,16 @@ class CategoriesChildController extends Controller
 		$categories_child = CategoriesChild::find($id);
 
 		return view('administrator.pages.categories_child.edit',compact('categories_child','category'));
-    }
+	}
 
-    public function PostEdit($id,Request $request)
-    {
+	public function PostEdit($id,Request $request)
+	{
 
-    	if (!$id) {
+		if (!$id) {
 			abort (404); 
 		}
 
-    	$request->validate(
+		$request->validate(
 			[
 				'category_id' => 'required',
 				'name' => 'required',
@@ -103,11 +103,11 @@ class CategoriesChildController extends Controller
 
 		return redirect()->back()->with('alert_success','Edit successfuly');
 
-    }
+	}
 
-    public function Delete($id)
-    {
-    	if (!$id) {
+	public function Delete($id)
+	{
+		if (!$id) {
 			abort (404); 
 		}
 
@@ -116,5 +116,5 @@ class CategoriesChildController extends Controller
 		$categories_child->delete();
 
 		return redirect()->back()->with('alert_success','Delete successfuly');
-    }
+	}
 }

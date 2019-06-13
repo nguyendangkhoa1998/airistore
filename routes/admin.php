@@ -41,3 +41,25 @@ Route::group(['prefix' => 'categories-child'], function() {
 
 });
 
+Route::group(['prefix' => 'products'], function() {
+
+    Route::get('index','ProductController@Index')->name('index.products');
+
+	Route::get('add','ProductController@Add')->name('add.products');
+
+	Route::post('add','ProductController@PostAdd');
+
+	Route::get('edit/{id}','ProductController@GetEdit')->name('edit.products');
+
+	Route::post('edit/{id}','ProductController@PostEdit');
+
+	Route::post('add-galery','ProductController@AddGalery')->name('add.galery');
+
+	Route::get('delete-galery/{id}','ProductController@DeleteGalery')->name('delete.galery');
+
+	Route::get('delete/{id}','ProductController@Delete')->name('delete.products');
+
+	Route::get('ajax_categorieschild/{id_category}','ProductController@AjaxGetCategoriesChild');
+
+});
+

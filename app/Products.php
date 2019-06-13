@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Products extends Model
 {
     protected $table='products';
-    protected $fillable = ['category_id','categories_child_id','name','symbolic_image','unit_price','quantity','short_desciption','desciption','stars','views','is_new','status'];
+    
+    protected $fillable = ['category_id','categories_child_id','name','symbolic_image','unit_price','quantity','short_desciption','desciption','is_new','status'];
 
     //Get relates products
     public function relates()
