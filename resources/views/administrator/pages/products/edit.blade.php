@@ -32,9 +32,9 @@
 
     </ul>
     @endif
-    @if(session('alert_access'))
+    @if(session('alert_success'))
     <div class="alert alert-success" style="margin-bottom: 0px" role="alert">
-        {{session('alert_access')}}
+        {{session('alert_success')}}
     </div>
     @endif
     <div class="" role="tabpanel" data-example-id="togglable-tabs">
@@ -200,7 +200,7 @@
                                         </div>
                                         <div class="modal-footer text-center">
                                             <button type="submit" class="btn btn-info btn-sm">
-                                                Add
+                                                Save
                                             </button>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                         </div>

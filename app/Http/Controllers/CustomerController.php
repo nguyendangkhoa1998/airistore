@@ -81,13 +81,13 @@ class CustomerController extends Controller
         ]);
 
         //Check Auth login
-        if(  Auth::attempt(['email' => $request->email, 'password' => $request->password])  ){
+        if(  Auth::attempt(['email' => $request->email, 'password' => $request->password,'role' => 1])){
 
             return redirect()->route('home');
 
         }else{
 
-            return redirect(route('login'))->with('alert', 'Account or password incorrect !');
+            return redirect(route('login'))->with('alert', 'Account incorrect !');
 
         }
 

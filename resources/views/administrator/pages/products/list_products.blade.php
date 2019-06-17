@@ -26,6 +26,11 @@
     <div class="x_panel">
       <div class="x_title">
         <a href="{{route('add.products')}}" class="btn btn-success">Thêm sản phẩm</a>
+        <button class="btn btn-danger" id="delete_products">Delete All</button>
+        <button class="btn btn-info" id="btn-show-filter">Filter</button>
+        <div class="filter-products">
+          aaaaaaa
+        </div>
         @if(session('alert_success'))
         <div class="alert alert-success" style="margin-bottom: 0px" role="alert">
           {{session('alert_success')}}
@@ -43,30 +48,29 @@
         <table class="table table-hover">
           <thead>
             <tr>
+              <th></th>
               <th>ID</th>
               <th>Name</th>
               <th>Unit Price</th>
               <th>Quantity</th>
-              <th>Stars</th>
+              <th>Status</th>
               <th>Views</th>
               <th>New</th>
               <th colspan="2">Tùy chọn</th>
             </tr>
           </thead>
           <tbody>
-            @php
-              $stt=0;
-            @endphp
             @if(count($products)<0)
               {{'Empty products'}}
             @else
               @foreach($products as $items)
                 <tr>
-                  <th scope="row">{{$items->id}}</th>
+                  <td><input type="checkbox" id="checkbox_product_id_{{$items->id}}" class="checkbox_product_id" value="{{$items->id}}" /></td>
+                  <td scope="row">{{$items->id}}</th>
                   <td>{{$items->name}}</td>
                   <td>${{$items->unit_price}}</td>
                   <td>{{$items->quantity}}</td>
-                  <td>{{$items->stars}}</td>
+                  <td>{{$items->status}}</td>
                   <td>{{$items->views}}</td>
                   <td>
                     @if($items->is_new==1)
@@ -78,7 +82,7 @@
                   <td>
                     <a href="{{route('edit.products',['id'=>$items->id])}}" class="btn btn-default btn-sm">
                       <i class="fa fa-wrench"></i>
-                      Edit
+                      Detail
                     </a>
                     <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal{{$items->id}}"><i class="fa fa-trash"></i>Delete</button>
                     <!-- Modal -->
@@ -115,4 +119,34 @@
     </div>
   </div>
 </div>
+@endsection
+@section('script')
+<script type="text/javascript">
+
+  $('input.checkbox_product_id').on('click',function(event) {
+
+      $('button#delete_products').click(function () {
+
+         var arr = $('.checkbox_product_id:checked').map(function () {
+
+             return $(this).val();
+
+         }).get();
+
+         if (arr!="") {
+
+           window.location.href ="administrator/products/delete/"+arr;
+
+         }
+
+      });
+
+  });
+
+  $('div.filter-products').hide();
+  $('button#btn-show-filter').click(function(event) {
+      $('div.filter-products').slideToggle('slow');
+  });
+ 
+</script>
 @endsection

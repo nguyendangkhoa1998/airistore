@@ -165,9 +165,132 @@ class ProductController extends Controller
 		return view('administrator.pages.products.edit',compact('product','categorys','categoriesChilds'));
 	}
 
-	public function PostEdit(Request $request)
+	public function PostEdit($id,Request $request)
 	{
-		
+
+		$request->validate(
+			[
+				'category_id' 			=> 'required',
+				'categories_child_id' 	=> 'required',
+				'name' 					=> 'required',
+				'unit_price' 			=> 'required',
+				'quantity' 				=> 'required',
+				'is_new'				=> 'required',
+				'status'				=> 'required'
+			],
+			[
+				'category_id.required' 			=> 'Category not null',
+				'categories_child_id.required' 	=> 'Categories child not null',
+				'name.required' 				=> 'Name not null',
+				'unit_price.required' 			=> 'Unit price not null',
+				'quantity.required'				=> 'Quantity not null',
+				'is_new.required'				=> 'Please select is new',
+				'status.required'				=>'Please select status'
+			]
+		);
+
+		$product = Products::find($id);
+
+
+		$product->fill($request->all());
+
+		if ($request->hasFile('symbolic_image')) {
+
+			$file_name = uniqid().".".$request->symbolic_image->extension();
+
+			$path = $request->symbolic_image->storeAs('images/products',$file_name);
+
+			$product->symbolic_image = $path;
+
+		}
+
+		$product->save();
+
+		$categorys = Category::active()->orderBy('id','asc')->get();
+
+		$categoriesChilds = CategoriesChild::where('active','=',1)->get();
+
+		return redirect()->back()->with('alert_success','Saved product');
+
+
+
+	}
+
+	public function Delete($ids)
+	{
+		if (!$ids) {
+
+			return abort(404);
+
+		}
+
+		$listId = explode(',', $ids);
+
+		if (count($listId)>1) {
+
+			foreach ($listId as $id) {
+				
+				$galery = ProductGalery::where('product_id',$id)->get();
+
+
+				if (count($galery)==1) {
+
+					$galery->delete();
+
+				}elseif(count($galery)>1){
+
+					foreach ($galery as $item) {
+					
+						$item->delete();
+
+					}
+
+				}
+
+				$product = Products::find($id);
+
+				if ($product) {
+
+					$product->delete();
+					
+				}
+
+			}
+
+		}else{
+
+			$galery = ProductGalery::where('product_id',$ids)->get();
+
+
+				if (count($galery)==1) {
+
+					$galery->delete();
+
+				}elseif(count($galery)>1){
+
+					foreach ($galery as $item) {
+					
+						$item->delete();
+
+					}
+
+				}
+
+				$product = Products::find($ids);
+
+				if ($product) {
+
+					$product->delete();
+					
+				}
+
+		}
+
+
+		return redirect()->back()->with('alert_success','Deleted product');
+
+
+
 	}
 
 	public function AddGalery(Request $request){
@@ -198,7 +321,7 @@ class ProductController extends Controller
 
             }
 
-        return redirect()->back()->with('alert_access','Add galery success');
+        return redirect()->back()->with('alert_success','Add galery success');
 
 	}
 
@@ -210,9 +333,13 @@ class ProductController extends Controller
 
 		$galery = ProductGalery::find($id);
 
-		$galery->delete();
+		if ($galery) {
 
-		return redirect()->back()->with('alert_access','Deleted Galery');
+			$galery->delete();
+			
+		}
+
+		return redirect()->back()->with('alert_success','Deleted Galery');
 
 	}
 }
