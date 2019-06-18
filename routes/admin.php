@@ -61,5 +61,7 @@ Route::group(['prefix' => 'products'], function() {
 
 	Route::get('ajax_categorieschild/{id_category}','ProductController@AjaxGetCategoriesChild');
 
+	Route::get('filter','ProductController@Filter')->name('filter.products');
+
 });
 

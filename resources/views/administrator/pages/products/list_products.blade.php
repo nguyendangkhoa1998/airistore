@@ -25,11 +25,37 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <a href="{{route('add.products')}}" class="btn btn-success">Thêm sản phẩm</a>
-        <button class="btn btn-danger" id="delete_products">Delete All</button>
-        <button class="btn btn-info" id="btn-show-filter">Filter</button>
-        <div class="filter-products">
-          aaaaaaa
+        <div class="col-md-12 col-sm-12 col-xs-12" style="padding-top:20px;">
+          <a href="{{route('add.products')}}" class="btn btn-success">Add Product</a>
+          <button class="btn btn-danger" id="delete_products">Delete</button>
+          <button class="btn btn-info" id="btn-show-filter">Filter</button>
+        </div>
+        <div class="filter-products col-md-12 col-sm-12 col-xs-12" style="padding-top:20px;">
+          <form action="{{route('filter.products')}}" method="get" class="form-horizontal" enctype="multipart/form-data">
+              <div class="form-group col-md-3 col-sm-3 col-xs-6">
+                <label class="control-label col-md-4 col-sm-4 col-xs-2">Status</label>
+                <div class="col-md-8 col-sm-8 col-xs-10">
+                  <select name="filter_status" class="form-control">
+                    <option value="" selected="selected">Choose Status</option>
+                    <option @if(isset($status)) @if($status==0) {{'selected'}} @endif @endif value="0">Disable</option>
+                    <option @if(isset($status)) @if($status==1) {{'selected'}} @endif @endif value="1">Enable</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group col-md-3 col-sm-3 col-xs-6">
+                <label class="control-label col-md-4 col-sm-4 col-xs-2">New</label>
+                <div class="col-md-8 col-sm-8 col-xs-10">
+                  <select name="filter_new" class="form-control">
+                    <option value="" selected="selected">Choose New</option>
+                    <option @if(isset($new)) @if($new==0) {{'selected'}} @endif @endif value="0">No</option>
+                    <option @if(isset($new)) @if($new==1) {{'selected'}} @endif @endif value="1">Yes</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group col-md-3 col-sm-3 col-xs-6">
+                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Submit</button>
+              </div>
+          </form>
         </div>
         @if(session('alert_success'))
         <div class="alert alert-success" style="margin-bottom: 0px" role="alert">
@@ -123,6 +149,13 @@
 @section('script')
 <script type="text/javascript">
 
+   jQuery('div.filter-products').hide();
+
+  @if(isset($status) || isset($new))
+    <script type="text/javascript">
+      $('div.filter-products').show();
+  @endif
+
   $('input.checkbox_product_id').on('click',function(event) {
 
       $('button#delete_products').click(function () {
@@ -143,7 +176,6 @@
 
   });
 
-  $('div.filter-products').hide();
   $('button#btn-show-filter').click(function(event) {
       $('div.filter-products').slideToggle('slow');
   });

@@ -12,6 +12,8 @@ use App\CategoriesChild;
 
 class ProductController extends Controller
 {
+
+	//----------- List products -------------
 	public function Index(Request $request)
 	{
 		if (isset($request->keyword)) {
@@ -40,6 +42,49 @@ class ProductController extends Controller
 		}
 
 		return view('administrator.pages.products.list_products',compact('products','keyword'));
+	}
+
+
+	//----------- Filter products -------------
+	public function Filter(Request $request)
+	{
+
+		$status = $request->filter_status;
+
+		$new = $request->filter_new;
+
+		if(isset($status) && isset($new)){
+
+			$products = Products::where('status',$status)
+				->where('is_new',$new)
+				->orderBy('id','desc')
+				->paginate(10);
+
+		}elseif (empty($status) && isset($new)) {
+
+			$products = Products::where('is_new',$new)
+				->orderBy('id','desc')
+				->paginate(10);
+
+		}elseif (isset($status) && empty($new)) {
+
+			$products = Products::where('status',$status)
+				->orderBy('id','desc')
+				->paginate(10);
+
+		}elseif (empty($status) && empty($new)) {
+
+			$products = Products::orderBy('id','desc')
+				->paginate(10);
+		}
+
+		$keyword = null;
+
+		$products->setPath(route('filter.products'))
+			->withPath(route('filter.products').'?filter_status='.$status.'&filter_new='.$new);
+
+		return view('administrator.pages.products.list_products',compact('products','keyword','status','new'));
+
 	}
 
 	public function AjaxGetCategoriesChild($id_category)
@@ -292,6 +337,7 @@ class ProductController extends Controller
 
 
 	}
+
 
 	public function AddGalery(Request $request){
 
