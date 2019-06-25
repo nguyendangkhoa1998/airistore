@@ -48,7 +48,7 @@
               <th>Phone Number</th>
               <th>E-mail</th>
               <th>Address</th>
-              <th colspan="2">Setting</th>
+              <th>Setting</th>
             </tr>
           </thead>
           <tbody>
@@ -64,26 +64,6 @@
                   <i class="fa fa-wrench"></i>
                   Detail
                 </a>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal{{$items->id}}"><i class="fa fa-trash"></i>Delete</button>
-                <!-- Modal -->
-                <div class="modal fade" id="myModal{{$items->id}}" role="dialog">
-                  <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Warning</h4>
-                      </div>
-                      <div class="modal-body">
-                        <h3>Do you want to delete it ? !</h3>
-                      </div>
-                      <div class="modal-footer text-center">
-                        <a href="{{route('delete.customer',['id'=>$items->id])}}" id="btn_delete" class="btn btn-danger btn-sm">Delete</a>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </td>
             </tr>
             @endforeach

@@ -42,7 +42,7 @@ class CustomerController extends Controller
 	public function Add()
 	{
 
-		return view('administrator.pages.customers.add_customers');
+		return view('administrator.pages.customers.add_customer');
 		
 	}
 
@@ -66,6 +66,67 @@ class CustomerController extends Controller
 		$customer->save();
 
 		return redirect()->back()->with('alert_success','Add customer success');
+	}
+
+	public function GetEdit($id)
+	{
+
+		if (!$id) {
+
+			abort(404);
+
+		}
+
+		$customer = User::find($id);
+
+		return view('administrator.pages.customers.edit_customer',compact('customer'));
+
+		
+	}
+
+	public function PostEdit($id,Request $request)
+	{
+
+		$request->validate([
+			'name' => 'required|max:30',
+			'phone_number' => 'required|numeric|digits_between:9,12',
+			'email' => 'required|max:50|min:5',
+			'address' => 'required'
+		]);
+
+		$customer = User::find($id);
+
+		$customer->fill($request->all());
+
+		if (isset($request->new_password)) {
+			
+			$customer->password = $request->new_password;
+
+		}else{
+			$customer->password = $customer->password;
+		}
+
+		$customer->save();
+
+		return redirect()->back()->with('alert_success','Updated');
+		
+	}
+
+	public function Delete($id)
+	{
+		
+		if (!$id) {
+
+			abort(404);
+
+		}
+
+		$customer = User::find($id);
+
+		$customer->delete();
+
+		return redirect(route('index.customer'))->with('alert_success','Deleted');
+
 	}
 
 }

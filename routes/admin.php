@@ -75,6 +75,8 @@ Route::group(['prefix' => 'customers'], function() {
 
 	Route::get('edit/{id}','CustomerController@GetEdit')->name('edit.customer');
 
+	Route::post('edit/{id}','CustomerController@PostEdit');
+
 	Route::get('delete/{id}','CustomerController@Delete')->name('delete.customer');
 
 });
