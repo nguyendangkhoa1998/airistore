@@ -163,12 +163,10 @@
                 var id_category = $(this).val();
 
                 $.ajax({
-
                   url: 'administrator/products/ajax_categorieschild/'+id_category,
                   type: 'GET',
                   dataType: 'json',
                   success:function(data){
-
                     $("select#categories_child").html(data.categories);
 
                     if (data.disabled) {

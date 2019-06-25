@@ -64,7 +64,7 @@
               <td>
                 <a href="{{route('edit.category',['id'=>$items->id])}}" class="btn btn-default btn-sm">
                   <i class="fa fa-wrench"></i>
-                  Edit
+                  Detail
                 </a>
                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal{{$items->id}}"><i class="fa fa-trash"></i>Delete</button>
                 <!-- Modal -->

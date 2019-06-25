@@ -65,3 +65,17 @@ Route::group(['prefix' => 'products'], function() {
 
 });
 
+Route::group(['prefix' => 'customers'], function() {
+
+	Route::get('index','CustomerController@Index')->name('index.customer');
+
+	Route::get('add','CustomerController@Add')->name('add.customer');
+
+	Route::post('add','CustomerController@PostAdd');
+
+	Route::get('edit/{id}','CustomerController@GetEdit')->name('edit.customer');
+
+	Route::get('delete/{id}','CustomerController@Delete')->name('delete.customer');
+
+});
+

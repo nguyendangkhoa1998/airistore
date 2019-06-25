@@ -87,6 +87,7 @@ class ProductController extends Controller
 
 	}
 
+	//----------Ajax get categories child----------------
 	public function AjaxGetCategoriesChild($id_category)
 	{
 
@@ -122,6 +123,7 @@ class ProductController extends Controller
 		return json_encode($result);
 	}
 
+	//------------Form add product-----------
 	public function Add()
 	{
 		$category = Category::active()->orderBy('id','asc')->get();
@@ -131,6 +133,8 @@ class ProductController extends Controller
 		return view('administrator.pages.products.add',compact('category','categoriesChild'));
 	}
 
+
+	//---------- Add product-----------------
 	public function PostAdd(Request $request){
 
 		$request->validate(
@@ -194,6 +198,7 @@ class ProductController extends Controller
 
 	}
 
+	//--------Get product by Id-----------
 	public function GetEdit($id)
 	{
 
@@ -210,6 +215,8 @@ class ProductController extends Controller
 		return view('administrator.pages.products.edit',compact('product','categorys','categoriesChilds'));
 	}
 
+
+	//----------Update product------------------
 	public function PostEdit($id,Request $request)
 	{
 
@@ -261,6 +268,7 @@ class ProductController extends Controller
 
 	}
 
+	//------------Delete product by id---------
 	public function Delete($ids)
 	{
 		if (!$ids) {
@@ -338,7 +346,7 @@ class ProductController extends Controller
 
 	}
 
-
+	//-----------Add galery product --------
 	public function AddGalery(Request $request){
 
 		$request->validate([
@@ -371,6 +379,7 @@ class ProductController extends Controller
 
 	}
 
+	//Delete galery by Id
 	public function DeleteGalery($id){
 
 		if (!$id) {

@@ -43,6 +43,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <select name="category_id" class="form-control" required="required">
+                <option value="" selected="selected">Choose categories child</option>
                 @foreach($category as $cate)
                   <option value="{{$cate->id}}">{{$cate->name}}</option>
                 @endforeach

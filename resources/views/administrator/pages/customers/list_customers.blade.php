@@ -1,15 +1,15 @@
 @extends('administrator.master_admin')
-@section('title','List categories child')
+@section('title','List Customers')
 @section('page-title')
 <div class="page-title">
   <div class="title_left">
-    <h3>List categories child</h3>
+    <h3>List Customers</h3>
   </div>
   <form action="" method="get">
     <div class="title_right">
       <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
         <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="Search..." value="{{$keyword}}">
+          <input type="text" name="keyword" <?php if($keyword) echo 'value="'.$keyword.'"'; ?> class="form-control" placeholder="Search...">
           <span class="input-group-btn">
             <button class="btn btn-default" type="submit">Search</button>
           </span>
@@ -25,7 +25,7 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <a href="{{route('add.categories.child')}}" class="btn btn-success">Add categories child</a>
+        <a href="{{route('add.customer')}}" class="btn btn-success">Add Customer</a>
         @if(session('alert_success'))
         <div class="alert alert-success" style="margin-bottom: 0px" role="alert">
           {{session('alert_success')}}
@@ -44,27 +44,23 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Category</th>
               <th>Name</th>
-              <th>Active</th>
+              <th>Phone Number</th>
+              <th>E-mail</th>
+              <th>Address</th>
               <th colspan="2">Setting</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($categories_child as $items)
+            @foreach($customers as $items)
             <tr>
               <th scope="row">{{$items->id}}</th>
-              <th>{{$items->RelationshipCategory->name}}</th>
               <td>{{$items->name}}</td>
+              <td>{{$items->phone_number}}</td>
+              <td>{{$items->email}}</td>
+              <td>{{$items->address}}</td>
               <td>
-                @if((int)$items->active==0)
-                {{'No'}}
-                @else
-                {{'Yes'}}
-                @endif
-              </td>
-              <td>
-                <a href="{{route('edit.categories.child',['id'=>$items->id])}}" class="btn btn-default btn-sm">
+                <a href="{{route('edit.customer',['id'=>$items->id])}}" class="btn btn-default btn-sm">
                   <i class="fa fa-wrench"></i>
                   Detail
                 </a>
@@ -82,9 +78,7 @@
                         <h3>Do you want to delete it ? !</h3>
                       </div>
                       <div class="modal-footer text-center">
-                        <a href="{{route('delete.categories.child',['id'=>$items->id])}}" id="btn_delete" class="btn btn-danger btn-sm">
-                          Delete
-                        </a>
+                        <a href="{{route('delete.customer',['id'=>$items->id])}}" id="btn_delete" class="btn btn-danger btn-sm">Delete</a>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                       </div>
                     </div>
@@ -94,7 +88,7 @@
             </tr>
             @endforeach
             <tr>
-              <td class="text-center" colspan="8">{{$categories_child->links()}}</td>
+              <td class="text-center" colspan="8">{{$customers->links()}}</td>
             </tr>
           </tbody>
         </table>
