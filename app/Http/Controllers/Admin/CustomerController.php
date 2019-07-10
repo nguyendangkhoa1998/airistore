@@ -71,17 +71,10 @@ class CustomerController extends Controller
 	public function GetEdit($id)
 	{
 
-		if (!$id) {
-
-			abort(404);
-
-		}
-
-		$customer = User::find($id);
+		$customer = User::findOrFail($id);
 
 		return view('administrator.pages.customers.edit_customer',compact('customer'));
-
-		
+	
 	}
 
 	public function PostEdit($id,Request $request)
@@ -115,13 +108,7 @@ class CustomerController extends Controller
 	public function Delete($id)
 	{
 		
-		if (!$id) {
-
-			abort(404);
-
-		}
-
-		$customer = User::find($id);
+		$customer = User::findOrFail($id);
 
 		$customer->delete();
 

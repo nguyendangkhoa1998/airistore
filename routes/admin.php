@@ -1,5 +1,5 @@
 <?php
-Route::get('/dashboard','AdminController@Index')->name('dashboard');
+Route::get('/','AdminController@Index')->name('dashboard');
 
 Route::get('/admin-logout','AdminController@Logout')->name('admin.logout');
 
@@ -78,6 +78,14 @@ Route::group(['prefix' => 'customers'], function() {
 	Route::post('edit/{id}','CustomerController@PostEdit');
 
 	Route::get('delete/{id}','CustomerController@Delete')->name('delete.customer');
+
+});
+
+Route::group(['prefix' => 'orders'], function(){
+
+	Route::get('index','OrderController@Index')->name('index.order');
+
+	Route::get('edit/{id}','OrderController@EditOrder')->name('edit.order');
 
 });
 
