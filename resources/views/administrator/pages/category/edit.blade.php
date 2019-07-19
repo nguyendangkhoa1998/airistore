@@ -25,49 +25,49 @@
             <div class="x_content">
                 @if ($errors->any())
                 <div class="alert alert-danger">
-                  <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-            @if(session('alert_success'))
-            <div class="alert alert-success" style="margin-bottom: 0px" role="alert">
-              {{session('alert_success')}}
-          </div>
-          @endif
-          <br />
-          <form action="" method="post" class="form-horizontal form-label-left">
-            @csrf
-            <input type="hidden" value="{{$category->id}}" name="id" >
-            <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Name category <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" name="name" value="{{$category->name}}" id="" required="required" class="form-control col-md-7 col-xs-12">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Active <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select name="active" class="form-control col-md-7 col-xs-12">
-                        <option value="1" @if($category->active==1) {{'selected'}} @endif>Yes</option>
-                        <option value="0" @if($category->active==0) {{'selected'}} @endif >No</option>
-                    </select>
+                @endif
+                @if(session('alert_success'))
+                <div class="alert alert-success" style="margin-bottom: 0px" role="alert">
+                    {{session('alert_success')}}
                 </div>
+                @endif
+                <br />
+                <form action="" method="post" class="form-horizontal form-label-left">
+                    @csrf
+                    <input type="hidden" value="{{$category->id}}" name="id" >
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Name category <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" name="name" value="{{$category->name}}" id="" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Active <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="active" class="form-control col-md-7 col-xs-12">
+                                <option value="1" @if($category->active==1) {{'selected'}} @endif>Yes</option>
+                                <option value="0" @if($category->active==0) {{'selected'}} @endif >No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <button class="btn btn-primary" type="reset">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="ln_solid"></div>
-            <div class="form-group">
-                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                    <button class="btn btn-primary" type="reset">Reset</button>
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-</div>
 </div>
 @endsection
