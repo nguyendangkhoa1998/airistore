@@ -1,22 +1,15 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
-
-
 class AdminLoginController extends Controller
 {
     //Login
     public function Login()
     {
-
         return view('administrator.pages.login');
-
     }
-
     //Login
     public function PostLogin(Request $request)
     {
@@ -31,11 +24,8 @@ class AdminLoginController extends Controller
         ]);
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
             return redirect(route('dashboard'));   
-		}else{
+        }else{
             return redirect(route('admin.login'))->with('alert', 'Sai tài khoản hoặc mật khẩu');
-            
         }
-
     }
-    
 }

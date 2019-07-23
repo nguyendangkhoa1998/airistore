@@ -1,13 +1,10 @@
 <?php
-
 namespace App;
-
 class Cart
 {
 	public $items = null;
 	public $totalQty = 0;
 	public $totalPrice = 0;
-
 	public function __construct($oldCart){
 		if($oldCart){
 			$this->items = $oldCart->items;
@@ -15,7 +12,6 @@ class Cart
 			$this->totalPrice = $oldCart->totalPrice;
 		}
 	}
-
 	public function add($item, $id){
 		$giohang = ['qty'=>0, 'price' => $item->unit_price, 'item' => $item];
 		if($this->items){

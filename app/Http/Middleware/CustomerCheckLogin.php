@@ -1,11 +1,7 @@
 <?php
-
 namespace App\Http\Middleware;
-
 use Closure;
-
 use Illuminate\Support\Facades\Auth;
-
 class CustomerCheckLogin
 {
     /**
@@ -17,15 +13,10 @@ class CustomerCheckLogin
      */
     public function handle($request, Closure $next)
     {
-
             if(Auth::user()->role == 1){
-                
                  return $next($request);
-
             }else{
-
                 return redirect(route('login'))->with('alert', 'Role is not logined !');
-
             }
     }
 }

@@ -16,6 +16,7 @@ class CreateTableOrderStatus extends Migration
         Schema::create('order_status', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('status')->default(0);
+            $table->string('title');
             $table->timestamps();
         });
     }

@@ -35,7 +35,6 @@
     <!-- bootstrap-daterangepicker -->
     <script src="admin/vendors/moment/min/moment.min.js"></script>
     <script src="admin/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
     <!-- bootstrap-wysiwyg -->
     <script src="admin/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
     <script src="admin/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
@@ -54,12 +53,9 @@
     <script src="admin/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
     <!-- starrr -->
     <script src="admin/vendors/starrr/dist/starrr.js"></script>
-
     <!-- jQuery custom content scroller -->
     <script src="admin/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-    
     <!-- Custom Theme Scripts -->
     <script src="admin/build/js/custom.min.js"></script>
-
     <!--  Jquery confirm -->
     <script type="text/javascript" src="admin/js/jquery-confirm.min.js"></script>

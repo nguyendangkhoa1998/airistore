@@ -17,14 +17,8 @@ class OrderController extends Controller
 	{
 		$order = Orders::findOrFail($idOrder);
 		$orders_detail = OrderDetail::where('order_id',$order->id)->get();
-		$my_product_ids = array();
 		foreach ($orders_detail as $order_detail) {
-			$my_product_ids[].= $order_detail->product_id;
-		}
-		$products = array();
- 		foreach($my_product_ids as $my_product_id ){
- 			$products['name']= Products::select('name')->where('id',$my_product_id)->first();
- 			$products['unit_price']= Products::select('unit_price')->where('id',$my_product_id)->first();
+			$products[] = Products::where('id',$order_detail->product_id)->first();
 		}
 		$customer = $order->RelationshipUsers;
 		return view('administrator.pages.orders.edit_order',compact('order','customer','products'));

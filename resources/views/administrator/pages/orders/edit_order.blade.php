@@ -234,11 +234,15 @@
 						<th>Qty</th>
 					</thead>
 					<tbody>
-						<tr>
-							<td>Product test 01</td>
-							<td>75 VND</td>
-							<td>2</td>
-						</tr>
+						@if($products)
+							@foreach($products as $product)
+							<tr>
+								<td>{{$product->name}}</td>
+								<td>{{$product->unit_price}}$</td>
+								<td>{{$order->RelationshipOrderDetail->quantity}}</td>
+							</tr>
+							@endforeach
+						@endif
 					</tbody>
 				</table>
 			</div>
@@ -297,7 +301,7 @@
 					<tbody>
 						<tr>
 							<td>Subtotal: </td>
-							<td>{{$order->total_price}}</td>
+							<td>{{$order->total_price}}$</td>
 						</tr>
 					</tbody>
 				</table>
