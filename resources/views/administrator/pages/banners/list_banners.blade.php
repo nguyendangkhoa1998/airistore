@@ -1,9 +1,9 @@
-@extends('admin.master_admin')
-@section('title','List slide')
+@extends('administrator.master_admin')
+@section('title','List banners')
 @section('page-title')
 <div class="page-title">
   <div class="title_left">
-    <h3>List Slide</h3>
+    <h3>List Banners</h3>
   </div>
   <form action="" method="get">
     <div class="title_right">
@@ -25,7 +25,7 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <a href="{{route('add.slide')}}" class="btn btn-success">Add slide</a>
+        <a href="{{route('add.slide')}}" class="btn btn-success">Add banner</a>
         @if(session('alert'))
         <div class="alert alert-success" style="margin-bottom: 0px" role="alert">
           {{session('alert')}}

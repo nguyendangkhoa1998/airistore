@@ -5,6 +5,10 @@
 	<div class="title_left">
 		<h3>Edit Order</h3>
 	</div>
+	<div class="title link">
+		<button class="btn btn-warning"><a href="javascript:;" title="Cancel order">Cancel order</a></button>
+		<button class="btn btn-default"><a href="javascript:;" title="Send mail">Send mail</a></button>
+	</div>
 </div>
 <div class="clearfix"></div>
 @endsection
@@ -272,6 +276,9 @@
 			</div>
 			<div class="x_content">
 				<p>{{$order->note}}</p>
+			</div>
+			<div class="status-bottom">
+				<b>{{$order->created_at}} : {{$order->RelationshipOrderStatus->title}}</b>
 			</div>
 		</div>
 	</div>
