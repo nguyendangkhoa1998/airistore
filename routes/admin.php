@@ -43,4 +43,13 @@ Route::group(['prefix' => 'customers'], function() {
 Route::group(['prefix' => 'orders'], function(){
 	Route::get('index','OrderController@Index')->name('index.order');
 	Route::get('edit/{id}','OrderController@EditOrder')->name('edit.order');
+	Route::get('cancel/{id}','OrderController@CancelOrder')->name('cancel.order');
+});
+Route::group(['prefix' => 'banners'], function(){
+	Route::get('index','BannersController@Index')->name('index.banner');
+	Route::get('add','BannersController@Add')->name('add.banner');
+	Route::post('add','BannersController@PostAdd');
+	Route::get('edit/{id}','BannersController@Edit')->name('edit.banner');
+	Route::post('edit/{id}','BannersController@PostEdit');
+	Route::get('delete/{id}','BannersController@Delete')->name('delete.banner');
 });

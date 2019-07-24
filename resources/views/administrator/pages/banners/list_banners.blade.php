@@ -25,7 +25,7 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <a href="{{route('add.slide')}}" class="btn btn-success">Add banner</a>
+        <a href="{{route('add.banner')}}" class="btn btn-success">Add banner</a>
         @if(session('alert'))
         <div class="alert alert-success" style="margin-bottom: 0px" role="alert">
           {{session('alert')}}
@@ -46,70 +46,31 @@
               <th>ID</th>
               <th>Title</th>
               <th>Image</th>
-              <th>Links</th>
+              <th>Status</th>
               <th colspan="2">Setting</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($slide as $items)
+            @foreach($banners as $banner)
             <tr>
-              <th scope="row">{{$items->id}}</th>
-              <td>{{$items->title}}</td>
+              <th scope="row">{{$banner->id}}</th>
+              <td>{{$banner->title}}</td>
               <th scope="row">
-                <img src="{{$items->image}}" class="img-responsive" width="200px">
+                <img src="{{$banner->images}}" class="img-responsive" width="200px">
               </th>
-              <td>{{$items->link}}</td>
+              <td>@if($banner->status==0) {{'No'}} @else {{'Yes'}} @endif</td>
               <td>
-                <a href="{{route('edit.slide',['id'=>$items->id])}}" class="btn btn-info btn-sm">
+                <a href="{{route('edit.banner',['id'=>$banner->id])}}" class="btn btn-default btn-sm">
                   <i class="fa fa-wrench"></i>
-                  Edit
+                  Detail
                 </a>
-                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal{{$items->id}}"><i class="fa fa-trash"></i>Delete</button>
-                          <!-- Modal -->
-                            <div class="modal fade" id="myModal{{$items->id}}" role="dialog">
-                              <div class="modal-dialog">
-
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Warning</h4>
-                                  </div>
-                                  <div class="modal-body">
-                                    <h3>Do you want to delete it ? !</h3>
-                                  </div>
-                                  <div class="modal-footer text-center">
-                                      <a href="{{route('delete.slide',['id'=>$items->id])}}" id="btn_delete" class="btn btn-info btn-sm">
-                                      Delete
-                                    </a>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                  </div>
-                                </div>
-
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-            @endsection
-            @section('script')
-
-            <script>
-                // $(document).ready(function(){
-                //     $("#btn_delete").change(function(){
-                //         var id_product=$(this).val();
-                //         $.get("admin/product/delete/"+id_product,function(data){
-                //             $("#category_child").html(data);
-                //         });
-                //     });
-                // });
-            </script>
-
-            @endsection
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

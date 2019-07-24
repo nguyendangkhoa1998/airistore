@@ -58,7 +58,7 @@
               <td>{{$items->total_price}}</td>
               <td>{{$items->shipping_address}}</td>
               <td>{{$items->payment_method}}</td>
-              <td>{{$items->status}}</td>
+              <td>{{$items->RelationshipOrderStatus->title}}</td>
               <td>
                 <a href="{{route('edit.order',['id'=>$items->id])}}" class="btn btn-default btn-sm">
                   <i class="fa fa-wrench"></i>

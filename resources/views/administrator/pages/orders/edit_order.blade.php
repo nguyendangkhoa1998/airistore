@@ -6,9 +6,14 @@
 		<h3>Edit Order</h3>
 	</div>
 	<div class="title link">
-		<button class="btn btn-warning"><a href="javascript:;" title="Cancel order">Cancel order</a></button>
+		<a class="btn btn-warning" @if($order->status==4) {{'disabled="disabled"'}} @endif href="{{route('cancel.order',['id'=>$order->id])}}" title="Cancel order">Cancel order</a>
 		<button class="btn btn-default"><a href="javascript:;" title="Send mail">Send mail</a></button>
 	</div>
+	@if(session('alert_success'))
+        <div class="alert alert-success" style="margin-bottom: 0px" role="alert">
+          {{session('alert_success')}}
+        </div>
+    @endif
 </div>
 <div class="clearfix"></div>
 @endsection
@@ -44,11 +49,7 @@
 						</tr>
 						<tr>
 							<th scope="row">Order status:</th>
-							<td>@if($order->status==0) {{'Has been canceled'}}
-							 	@elseif($order->status==1) {{'Pending'}}
-							 	@elseif($order->status==2) {{'Processing'}}
-							  	@endif
-							</td>
+							<td>{{$order->RelationshipOrderStatus->title}}</td>
 						</tr>
 						<tr>
 							<th scope="row">Placed from IP:</th>
