@@ -26,9 +26,9 @@
     <div class="x_panel">
       <div class="x_title">
         <a href="{{route('add.banner')}}" class="btn btn-success">Add banner</a>
-        @if(session('alert'))
+        @if(session('alert_success'))
         <div class="alert alert-success" style="margin-bottom: 0px" role="alert">
-          {{session('alert')}}
+          {{session('alert_success')}}
         </div>
         @endif
         <ul class="nav navbar-right panel_toolbox">
@@ -51,6 +51,7 @@
             </tr>
           </thead>
           <tbody>
+            @if(isset($banners))
             @foreach($banners as $banner)
             <tr>
               <th scope="row">{{$banner->id}}</th>
@@ -58,7 +59,7 @@
               <th scope="row">
                 <img src="{{$banner->images}}" class="img-responsive" width="200px">
               </th>
-              <td>@if($banner->status==0) {{'No'}} @else {{'Yes'}} @endif</td>
+              <td>@if($banner->status==1) {{'No'}} @else {{'Yes'}} @endif</td>
               <td>
                 <a href="{{route('edit.banner',['id'=>$banner->id])}}" class="btn btn-default btn-sm">
                   <i class="fa fa-wrench"></i>
@@ -67,6 +68,10 @@
               </td>
             </tr>
             @endforeach
+            @endif
+            <tr>
+              <td colspan="5">{{$banners->links()}}</td>
+            </tr>
           </tbody>
         </table>
       </div>

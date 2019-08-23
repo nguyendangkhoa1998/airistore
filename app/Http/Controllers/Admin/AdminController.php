@@ -10,8 +10,8 @@ class AdminController extends Controller
 {
     public function Index()
     {
-        $LifeTimeSale = Orders::select('total_price')->get();
-        $orders = Orders::select('id')->get();
+        $LifeTimeSale = Orders::select('total_price')->where('status','<>','4')->get();
+        $orders = Orders::select('id')->where('status','<>','4')->get();
         $totalprice = array();
         foreach($LifeTimeSale as $item){
             array_push($totalprice, $item->total_price);

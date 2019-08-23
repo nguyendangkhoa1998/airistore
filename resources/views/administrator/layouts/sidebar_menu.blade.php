@@ -24,11 +24,11 @@
           <li><a href="{{route('index.banner')}}">Manage banners</a></li>
         </ul>
       </li>
-      <li><a><i class="fa fa-gear"></i> System <span class="fa fa-chevron-down"></span></a>
+      <!-- <li><a><i class="fa fa-gear"></i> System <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="">Configuration</a></li>
         </ul>
-      </li>
+      </li> -->
     </ul>
   </div>
 </div>
