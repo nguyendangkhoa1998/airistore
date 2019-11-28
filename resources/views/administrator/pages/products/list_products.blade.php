@@ -148,37 +148,25 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-
    jQuery('div.filter-products').hide();
 
   @if(isset($status) || isset($new))
-    <script type="text/javascript">
       $('div.filter-products').show();
   @endif
 
   $('input.checkbox_product_id').on('click',function(event) {
-
       $('button#delete_products').click(function () {
-
          var arr = $('.checkbox_product_id:checked').map(function () {
-
              return $(this).val();
-
          }).get();
-
          if (arr!="") {
-
            window.location.href ="administrator/products/delete/"+arr;
-
          }
-
       });
-
   });
-
+  
   $('button#btn-show-filter').click(function(event) {
       $('div.filter-products').slideToggle('slow');
   });
- 
 </script>
 @endsection

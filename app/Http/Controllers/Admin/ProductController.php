@@ -177,31 +177,16 @@ class ProductController extends Controller
 		if (!$ids) {
 			return abort(404);
 		}
+		$listId = array();
 		$listId = explode(',', $ids);
 		if (count($listId)>1) {
 			foreach ($listId as $id) {
-				$galery = ProductGalery::where('product_id',$id)->get();
-				if (count($galery)==1) {
-					$galery->delete();
-				}elseif(count($galery)>1){
-					foreach ($galery as $item) {
-						$item->delete();
-					}
-				}
 				$product = Products::find($id);
 				if ($product) {
 					$product->delete();
 				}
 			}
 		}else{
-			$galery = ProductGalery::where('product_id',$ids)->get();
-				if (count($galery)==1) {
-					$galery->delete();
-				}elseif(count($galery)>1){
-					foreach ($galery as $item) {
-						$item->delete();
-					}
-				}
 				$product = Products::find($ids);
 				if ($product) {
 					$product->delete();
