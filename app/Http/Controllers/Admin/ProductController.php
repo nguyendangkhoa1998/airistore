@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers\Admin;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Products;
 use App\ProductGalery;
 use App\Category;
 use App\CategoriesChild;
+
 class ProductController extends Controller
 {
 	//----------- List products -------------
@@ -13,9 +15,6 @@ class ProductController extends Controller
 	{
 		if (isset($request->keyword)) {
 			$keyword = $request->keyword;
-			if ($keyword==null) {
-				$keyword = null;
-			}
 			$products = Products::where('name','like',"%$keyword%")
 			->orderBy('id','desc')
 			->paginate(10);
@@ -34,24 +33,24 @@ class ProductController extends Controller
 		$new = $request->filter_new;
 		if(isset($status) && isset($new)){
 			$products = Products::where('status',$status)
-				->where('is_new',$new)
-				->orderBy('id','desc')
-				->paginate(10);
+			->where('is_new',$new)
+			->orderBy('id','desc')
+			->paginate(10);
 		}elseif (empty($status) && isset($new)) {
 			$products = Products::where('is_new',$new)
-				->orderBy('id','desc')
-				->paginate(10);
+			->orderBy('id','desc')
+			->paginate(10);
 		}elseif (isset($status) && empty($new)) {
 			$products = Products::where('status',$status)
-				->orderBy('id','desc')
-				->paginate(10);
+			->orderBy('id','desc')
+			->paginate(10);
 		}elseif (empty($status) && empty($new)) {
 			$products = Products::orderBy('id','desc')
-				->paginate(10);
+			->paginate(10);
 		}
 		$keyword = null;
 		$products->setPath(route('filter.products'))
-			->withPath(route('filter.products').'?filter_status='.$status.'&filter_new='.$new);
+		->withPath(route('filter.products').'?filter_status='.$status.'&filter_new='.$new);
 		return view('administrator.pages.products.list_products',compact('products','keyword','status','new'));
 	}
 	//----------Ajax get categories child----------------
@@ -63,8 +62,8 @@ class ProductController extends Controller
 			$result['disabled'] = 'yes';
 		}else{
 			$categoriesChild = CategoriesChild::where('category_id','=',$id_category)
-				->where('active','=',1)
-				->get();
+			->where('active','=',1)
+			->get();
 			if (count($categoriesChild)==0) {
 				$result['categories'] = "<option value=''>Null</option>";
 			}else{
@@ -187,29 +186,29 @@ class ProductController extends Controller
 				}
 			}
 		}else{
-				$product = Products::find($ids);
-				if ($product) {
-					$product->delete();
-				}
+			$product = Products::find($ids);
+			if ($product) {
+				$product->delete();
+			}
 		}
 		return redirect()->back()->with('alert_success','Deleted product');
 	}
 	//-----------Add galery product --------
 	public function AddGalery(Request $request){
 		$request->validate([
-            'galery_edit'=>	'required'
-        	],[
-            'galery_edit.required'	=>	'galery is not be null'
-        	]);
-        if ($request->hasFile('galery_edit')){
-	            $galeryItem = new ProductGalery();
-	            $galeryItem->product_id = $request->product_id;
-	            $filename = uniqid().".".$request->galery_edit->extension();
-	            $path = $request->file('galery_edit')->move('images/galery/pro_'.$request->product_id,$filename);
-	            $galeryItem->image_url = $path;
-	            $galeryItem->save();
-            }
-        return redirect()->back()->with('alert_success','Add galery success');
+			'galery_edit'=>	'required'
+		],[
+			'galery_edit.required'	=>	'galery is not be null'
+		]);
+		if ($request->hasFile('galery_edit')){
+			$galeryItem = new ProductGalery();
+			$galeryItem->product_id = $request->product_id;
+			$filename = uniqid().".".$request->galery_edit->extension();
+			$path = $request->file('galery_edit')->move('images/galery/pro_'.$request->product_id,$filename);
+			$galeryItem->image_url = $path;
+			$galeryItem->save();
+		}
+		return redirect()->back()->with('alert_success','Add galery success');
 	}
 	//Delete galery by Id
 	public function DeleteGalery($id){
